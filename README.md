@@ -2,7 +2,7 @@
 
 At Adrenaline, we're building tools for understanding large codebases. One of the best ways to learn a new codebase is to visualize it. Engineers do this all the time when they explain concepts on whiteboards or propose code changes using design documents. With LLMs, these visualizations can be generated on-the-spot and catered to a specific prompt. Adrenaline achieves this functionality right now in production by prompting GPT-4 to generate a diagram in MermaidJS syntax, given a query and some relevant code chunks.
 
-This approach has two problems: 
+But this approach has two problems: 
 
 1. GPT-4 frequently generates invalid MermaidJS syntax
 2. Diagrams can be low-quality in a variety of ways, such as being too abstract or too detailed, leaving out important information, or even using the wrong diagram type (e.g. a sequential vs. flow diagram)
