@@ -7,9 +7,16 @@ But this approach has two problems:
 1. GPT-4 frequently generates invalid MermaidJS syntax
 2. Diagrams can be low-quality in a variety of ways, such as being too abstract or too detailed, leaving out important information, or even using the wrong diagram type (e.g. a sequential vs. flow diagram)
 
+You should have recieved an email with instructions on how to access the current data, along with our OpenAI API key.
+
 Edit this repository with your own approach at solving these two problems. You have a lot of liberty here. For example, to improve the syntax accuracy you may want to fine-tune either an OpenAI model or an open-source one. To improve quality, you may want to generate a training set using multiple LLM calls to construct diagrams.
 
 The main objective here is to beat GPT-4 in both syntax accuracy and diagram quality.
+
+Requirements:
+- Include your evaluation pipeline, along with a summary of results from that evaluation pipeine.
+- Include any code you wrote for dataset augmentation/generation (NOTE: You do not have to include the full dataset).
+- If you choose to use a notebook (i.e. Google Colab) for finetuning, please add that as well.
 
 ### To make a submission:
 
