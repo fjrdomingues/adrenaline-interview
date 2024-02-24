@@ -1,3 +1,5 @@
+# To help visualizing the dataset provided
+
 import json
 
 # Define the filename
