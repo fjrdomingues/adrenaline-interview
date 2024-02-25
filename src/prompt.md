@@ -25,7 +25,7 @@ Un mutex es un tipo de cerrojo utilizado en programación para garantizar la exc
 
 # DiagramType - Diagram type that you must use and why it was chosen
 Diagram Type: stateDiagram
-Reasoning: La explicación sobre qué hace un mutex y sus características sugiere un enfoque en el comportamiento y los estados por los que puede pasar un mutex (bloqueado, desbloqueado, inicializado, etc.), así como las transiciones entre estos estados. Un diagrama de estados es ideal para visualizar este tipo de comportamiento y las diferentes condiciones que pueden causar cambios de estado, lo que se alinea con la descripción dada sobre el mutex.
+Reasoning: Dado que un mutex se utiliza para manejar el estado de acceso a recursos (bloqueado o desbloqueado) y garantizar la exclusión mutua entre hilos, un diagrama de estado es apropiado para mostrar cómo cambian los estados de un mutex según las interacciones (p. ej., solicitar acceso, adquirir el cerrojo, liberar el cerrojo). Los diagramas de estado son útiles para representar estas transiciones de estado y ayudarían a ilustrar el comportamiento de un mutex en diferentes situaciones.
 
 # DiagramTypeDocs - Syntax documentation to build the diagram
 

@@ -10,6 +10,7 @@ import json
 import subprocess
 from openai import OpenAI
 from dotenv import load_dotenv
+from sklearn.model_selection import train_test_split
 from diagram_types_docs import flowchart as flowchart_docs, sequenceDiagram as sequenceDiagram_docs, classDiagram as classDiagram_docs, stateDiagram as stateDiagram_docs
 
 openai_model = "gpt-4-0125-preview"
@@ -257,3 +258,28 @@ with open(dataset_filename, 'w', encoding='utf-8') as file:
 
 print(f'Total failed diagram generations: {failed_diagram_count}')
 print(f'Dataset created and saved to {dataset_filename}')
+
+# Split the dataset
+with open(dataset_filename, 'r', encoding='utf-8') as file:
+  data = [json.loads(line) for line in file]
+
+# Split the data into training and testing datasets
+# Using a 80-20 split for training and testing
+train_data, test_data = train_test_split(data, test_size=0.2, random_state=42)
+
+# Define filenames for the training and testing dataset
+train_filename = '../data/training_dataset.jsonl'
+test_filename = '../data/testing_dataset.jsonl'
+
+# Write the training dataset to a file
+with open(train_filename, 'w', encoding='utf-8') as file:
+  for entry in train_data:
+    file.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+# Write the testing dataset to a file
+with open(test_filename, 'w', encoding='utf-8') as file:
+  for entry in test_data:
+    file.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+print(f'Training dataset created and saved to {train_filename}')
+print(f'Testing dataset created and saved to {test_filename}')
