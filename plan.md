@@ -6,15 +6,15 @@
 - Generate dataset for training
   - ✅ Use dataset that was provided and filter questions that are programming related (using GPT)
   - ✅ Ask GPT to choose the appropriate diagram type for the each answer
-  - Ask GPT to generate the diagram based on the diagram type and its documentation
-  - Evaluate output for valid syntax, if incorrect, repeat
+  - ✅ Ask GPT to generate the diagram based on the diagram type and its documentation
+  - ✅ Evaluate output for valid syntax, if incorrect, repeat
   - (for later) Further refine the answer to improve quality
 - Use generated dataset for fine-tuning a model
   - Include in prompt:
     - Diagram type
     - answer context
-    - Diagram type documentation
+    - Diagram type documentation (should we include the docs or not?)
 - Evaluate performance of fine-tuned model:
-  - Check for syntax validity
+  - Check for syntax validity (how many failed attempts with GPT-4 vs with fine-tuned model?)
   - Ask GPT-4 to evaluate
 - Try and compare different approaches

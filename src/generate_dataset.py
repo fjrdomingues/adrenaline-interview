@@ -26,7 +26,8 @@ load_dotenv()
 
 # Define the filenames
 input_filename = '../data/mermaid_dataset_public.json'
-output_filename = '../data/mermaid_dataset_public_programming_filtered.json'
+output_filename = '../data/mermaid_dataset_public_filtered.json'
+dataset_filename = '../data/dataset_full.jsonl'
 
 # Get the OpenAI API key
 api_key = os.getenv("OPENAI_API_KEY", "")
@@ -111,6 +112,7 @@ Reasoning: {diagram_type_reason}
 
 # Your output'''
 
+  # Writing on a file to check if prompt is format correctly
   with open('prompt.md', 'w') as file:
     file.write(system)
     file.write("\n")
@@ -125,7 +127,7 @@ Reasoning: {diagram_type_reason}
   )
   res = response.choices[0].message.content
   # print (res)
-  return res
+  return {"diagram": res, "system": system, "prompt": prompt}
 
 
 def validate_diagram_with_mermaid(diagram_code):
@@ -149,19 +151,30 @@ def validate_diagram_with_mermaid(diagram_code):
       print(f'Node.js script failed: {e.stderr}')
       return False
 
+def convert_to_training_format(system_content, user_content, assistant_content):
+  return {
+      "messages": [
+          {"role": "system", "content": system_content},
+          {"role": "user", "content": user_content},
+          {"role": "assistant", "content": assistant_content}
+      ]
+  }
+
 # Open and read the JSON file
 with open(input_filename, 'r', encoding='utf-8') as file:
     # Load JSON content from the file
     full_data = json.load(file)
     
     # Limit the numbers of objs for testing purposes
-    data = full_data[:5]
+    data = full_data[:3]
 
 # Initialize a list to store the updated objects
 filtered_data = []
 
 # Get the total number of data points
 total_questions = len(data)
+
+failed_diagram_count = 0
 
 ### Main Loop
 
@@ -198,18 +211,21 @@ for index, obj in enumerate(data):
     attempts = 0
     while attempts < MAX_ATTEMPTS:
         # Query GPT to build the diagram based on diagram type, diagram type documentation, question and answer
-        final_diagram = build_diagram(question, answer, diagram_type, diagram_type_reason, documentation)
+        final_diagram_res = build_diagram(question, answer, diagram_type, diagram_type_reason, documentation)
 
-        print("Diagram:", final_diagram)
+        print("Diagram:", final_diagram_res['diagram'])
         
-        valid = validate_diagram_with_mermaid(final_diagram)
+        valid = validate_diagram_with_mermaid(final_diagram_res['diagram'])
         if valid:
             print('Valid Mermaid diagram')
-            obj['final_diagram'] = final_diagram
+            obj['system'] = final_diagram_res['system']
+            obj['prompt'] = final_diagram_res['prompt']
+            obj['diagram'] = final_diagram_res['diagram']
             break
         else:
             print('Invalid Mermaid diagram. Attempting to regenerate...')
             attempts += 1
+            failed_diagram_count += 1  # Increment the counter for each failed attempt
 
     if not valid:
       print(f"Failed to generate a valid diagram after {MAX_ATTEMPTS} attempts.")
@@ -220,8 +236,24 @@ for index, obj in enumerate(data):
     # Print the current progress
     print(f'Progress: {index+1}/{total_questions} questions processed.')
 
-# Write the updated objects to a new file
+# Write everything to a file that can be used for inspecting the entire data
 with open(output_filename, 'w', encoding='utf-8') as file:
     json.dump(filtered_data, file, indent=4)
 
-print(f'Dataset filtered and saved to {output_filename}')
+# Write the dataset file that will be used for fine-tuning an OpenAI model
+with open(dataset_filename, 'w', encoding='utf-8') as file:
+    for entry in filtered_data:
+        # Only proceed if there is a diagram field and it is not empty
+        if entry.get('diagram'):
+            messages = [
+                {"role": "system", "content": entry['system']},  # The system message used
+                {"role": "user", "content": entry['prompt']},  # The prompt used
+                {"role": "assistant", "content": entry['diagram']}  # The diagram generated
+            ]
+            # Create a dictionary for the JSON Lines item
+            jsonl_item = {"messages": messages}
+            # Write the JSON Lines item to file. Each item has to be followed by a newline "\n"
+            file.write(json.dumps(jsonl_item, ensure_ascii=False) + '\n')
+
+print(f'Total failed diagram generations: {failed_diagram_count}')
+print(f'Dataset created and saved to {dataset_filename}')
