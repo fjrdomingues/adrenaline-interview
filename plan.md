@@ -3,7 +3,7 @@
 - Improve quality of diagrams
 
 # Plan
-- Generate dataset for training
+- ✅ Generate dataset for training
   - ✅ Use dataset that was provided and filter questions that are programming related (using GPT)
   - ✅ Ask GPT to choose the appropriate diagram type for the each answer
   - ✅ Ask GPT to generate the diagram based on the diagram type and its documentation
@@ -14,7 +14,7 @@
     - instruct the model to simplify the syntax
     - Ask GPT to evaluate the diagram
     - Ask GPT to generate a description of a diagram and have a model just creating the syntax❗
-- Generate dataset for fine-tuning an openAI model
+- ✅ Generate dataset for fine-tuning an openAI model
   - Include in prompt:
     - Diagram type
     - question and answer context
