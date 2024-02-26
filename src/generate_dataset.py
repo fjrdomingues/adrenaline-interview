@@ -10,7 +10,9 @@ import json
 import subprocess
 from openai import OpenAI
 from dotenv import load_dotenv
+import threading
 from sklearn.model_selection import train_test_split
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from diagram_types_docs import flowchart as flowchart_docs, sequenceDiagram as sequenceDiagram_docs, classDiagram as classDiagram_docs, stateDiagram as stateDiagram_docs
 
 openai_model = "gpt-4-0125-preview"
@@ -93,8 +95,12 @@ Your output will be parsed and validate so you must reply with VALID mermaidJS c
 { diagram }
 ```
 
-It is vital that your produce valid syntax for the mermaidJS so it's preferable to create diagrams using simple syntax.
-Take into account when you need to escape characters for the syntax to be valid
+Prefer diagrams with simple syntax
+Avoid styling on the diagram
+Escape characters when needed
+Make sure that you don't use any forbidden mermaid characters
+Make sure to below the instructions and examples in the syntax documentation
+You MUST produce valid mermaidJS syntax!
 '''
 
   prompt = \
@@ -145,7 +151,7 @@ def validate_diagram_with_mermaid(diagram_code):
       if process.stdout.strip() == 'Syntax is correct.':
           return True
       else:
-          print("Error:", process.stderr.strip())
+          # print("Error:", process.stderr.strip())
           return False
   except subprocess.CalledProcessError as e:
       # Handle errors in case the Node.js script failed to run
@@ -166,8 +172,9 @@ with open(input_filename, 'r', encoding='utf-8') as file:
     # Load JSON content from the file
     full_data = json.load(file)
     
-    # Limit the numbers of objs for testing purposes
-    data = full_data[:3]
+    data = full_data
+    # Limit the numbers of objs for testing purposes (for testing)
+    # data = full_data[:10]
 
 # Initialize a list to store the updated objects
 filtered_data = []
@@ -176,66 +183,84 @@ filtered_data = []
 total_questions = len(data)
 
 failed_diagram_count = 0
+failed_diagram_count_lock = threading.Lock()
 
 ### Main Loop
 
-# Iterate over each question in the data
-for index, obj in enumerate(data):
-    # Get the question text from the object
-    question = obj.get("question", "")
-    answer = obj.get("answer", "")
+def process_question(obj):
+  global failed_diagram_count 
+
+  # Get the question text from the object
+  question = obj.get("question", "")
+  answer = obj.get("answer", "")
+  
+  # Query GPT to check if it's a programming-related question (API call)
+  is_programming = is_programming_question(question)
+
+  print("Is Programming:", is_programming)
+  # If it's not a programming-related question, skip the rest of the loop
+  if not is_programming:
+      return None
+
+  # Query GPT to get the diagram type (API call)
+  diagram_type_info = get_diagram_type(question, answer)
+  diagram_type = diagram_type_info["diagramType"]
+  diagram_type_reason = diagram_type_info["thoughts"]
+  print("Diagram Type:", diagram_type)
+  # print("Diagram Type Reason:", diagram_type_reason)
+
+  # Get the corresponding documentation for the determined diagram type
+  documentation = diagram_docs.get(diagram_type, "")
+  
+  # Add the gpt responses to the object
+  obj['is_programming'] = is_programming
+  obj['diagram_type'] = diagram_type
+
+  # A loop to ensure a valid diagram is generated
+  MAX_ATTEMPTS = 5  # set a maximum number of attempts to prevent infinite loops
+  attempts = 0
+  while attempts < MAX_ATTEMPTS:
+      # Query GPT to build the diagram based on diagram type, diagram type documentation, question and answer (API call)
+      final_diagram_res = build_diagram(question, answer, diagram_type, diagram_type_reason, documentation) 
+
+      # print("Diagram:", final_diagram_res['diagram'])
+      
+      valid = validate_diagram_with_mermaid(final_diagram_res['diagram'])
+      if valid:
+          print('Valid Mermaid diagram')
+          obj['system'] = final_diagram_res['system']
+          obj['prompt'] = final_diagram_res['prompt']
+          obj['diagram'] = final_diagram_res['diagram']
+          return obj
+      else:
+          print('Invalid Mermaid diagram. Attempting to regenerate...')
+          attempts += 1
+          with failed_diagram_count_lock:  # Use the lock to protect this section
+            failed_diagram_count += 1
+  
+  # If failed to generate diagram
+  print(f"Failed to generate a valid diagram after {MAX_ATTEMPTS} attempts.")
+  print(f'Failed diagram generations so far: {failed_diagram_count}')
+  return None
+
+
+# How many jobs to run in parallel
+workers = 10
+processed_count = 0
+
+# Initialize the ThreadPoolExecutor
+with ThreadPoolExecutor(max_workers=workers) as executor:
+    # Submit the tasks to the executor
+    future_to_obj = {executor.submit(process_question, obj): obj for obj in data}
     
-    # Query GPT to check if it's a programming-related question
-    is_programming = is_programming_question(question)
-
-    print("Is Programming:", is_programming)
-    # If it's not a programming-related question, skip the rest of the loop
-    if not is_programming:
-        continue
-
-    # Query GPT to get the diagram type
-    diagram_type_info = get_diagram_type(question, answer)
-    diagram_type = diagram_type_info["diagramType"]
-    diagram_type_reason = diagram_type_info["thoughts"]
-    print("Diagram Type:", diagram_type)
-    print("Diagram Type Reason:", diagram_type_reason)
-
-    # Get the corresponding documentation for the determined diagram type
-    documentation = diagram_docs.get(diagram_type, "")
-    
-    # Add the gpt responses to the object
-    obj['is_programming'] = is_programming
-    obj['diagram_type'] = diagram_type
-
-    # A loop to ensure a valid diagram is generated
-    MAX_ATTEMPTS = 5  # set a maximum number of attempts to prevent infinite loops
-    attempts = 0
-    while attempts < MAX_ATTEMPTS:
-        # Query GPT to build the diagram based on diagram type, diagram type documentation, question and answer
-        final_diagram_res = build_diagram(question, answer, diagram_type, diagram_type_reason, documentation)
-
-        print("Diagram:", final_diagram_res['diagram'])
-        
-        valid = validate_diagram_with_mermaid(final_diagram_res['diagram'])
-        if valid:
-            print('Valid Mermaid diagram')
-            obj['system'] = final_diagram_res['system']
-            obj['prompt'] = final_diagram_res['prompt']
-            obj['diagram'] = final_diagram_res['diagram']
-            break
-        else:
-            print('Invalid Mermaid diagram. Attempting to regenerate...')
-            attempts += 1
-            failed_diagram_count += 1  # Increment the counter for each failed attempt
-
-    if not valid:
-      print(f"Failed to generate a valid diagram after {MAX_ATTEMPTS} attempts.")
-
-    # Update the filtered data list with the modified object
-    filtered_data.append(obj)
-
-    # Print the current progress
-    print(f'Progress: {index+1}/{total_questions} questions processed.')
+    # Process the results as they complete
+    for future in as_completed(future_to_obj):
+        # Get the result from the future
+        result = future.result()
+        processed_count += 1
+        print(f'Progress: {processed_count}/{total_questions} questions processed.')
+        if result is not None:
+          filtered_data.append(result)
 
 # Write everything to a file that can be used for inspecting the entire data
 with open(output_filename, 'w', encoding='utf-8') as file:
