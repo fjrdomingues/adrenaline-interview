@@ -24,6 +24,18 @@ diagram_docs = {
     "stateDiagram": stateDiagram_docs,
 }
 
+api_usage = {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0
+}
+api_usage_lock = threading.Lock()
+def update_usage_stats(usage_data):
+  with api_usage_lock:  # Use the lock to protect the update operation
+    api_usage["prompt_tokens"] += usage_data.prompt_tokens
+    api_usage["completion_tokens"] += usage_data.completion_tokens
+    api_usage["total_tokens"] += usage_data.total_tokens
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -42,6 +54,7 @@ client = OpenAI()
 def is_programming_question(question):
   response = client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
+    temperature=0,
     response_format={ "type": "json_object" },
     messages=[
       {"role": "system", "content": 'Decide if the question provided is related with the topic of programming. Reply in the following JSON format: {"isProgramming": true|false}'},
@@ -50,6 +63,8 @@ def is_programming_question(question):
   )
   parsed_content = json.loads(response.choices[0].message.content)
   # print (parsed_content)
+  usage_data = response.usage
+  update_usage_stats(usage_data)
   return parsed_content["isProgramming"]
 
 # Function to ask GPT what is the best diagram type for the question/answer pair. Limiting the model to use a list of diagram types (we can later add more types if needed)
@@ -77,6 +92,7 @@ f'''# Question
 
   response = client.chat.completions.create(
     model=openai_model,
+    temperature=0,
     response_format={ "type": "json_object" },
     messages=[
       {"role": "system", "content": system},
@@ -85,6 +101,8 @@ f'''# Question
   )
   parsed_content = json.loads(response.choices[0].message.content)
   # print (parsed_content)
+  usage_data = response.usage
+  update_usage_stats(usage_data)
   return parsed_content
 
 def build_diagram(question, answer, diagram_type, diagram_type_reason, documentation):
@@ -127,6 +145,7 @@ Reasoning: {diagram_type_reason}
 
   response = client.chat.completions.create(
     model=openai_model,
+    temperature=0,
     messages=[
       {"role": "system", "content": system},
       {"role": "user", "content": prompt}
@@ -134,6 +153,8 @@ Reasoning: {diagram_type_reason}
   )
   res = response.choices[0].message.content
   # print (res)
+  usage_data = response.usage
+  update_usage_stats(usage_data)
   return {"diagram": res, "system": system, "prompt": prompt}
 
 
@@ -173,8 +194,8 @@ with open(input_filename, 'r', encoding='utf-8') as file:
     full_data = json.load(file)
     
     data = full_data
-    # Limit the numbers of objs for testing purposes (for testing)
-    # data = full_data[:10]
+    # Get a subset of the src dataset
+    data = full_data[-200:] # last 200 objects
 
 # Initialize a list to store the updated objects
 filtered_data = []
@@ -197,7 +218,7 @@ def process_question(obj):
   # Query GPT to check if it's a programming-related question (API call)
   is_programming = is_programming_question(question)
 
-  print("Is Programming:", is_programming)
+  # print("Is Programming:", is_programming)
   # If it's not a programming-related question, skip the rest of the loop
   if not is_programming:
       return None
@@ -206,7 +227,7 @@ def process_question(obj):
   diagram_type_info = get_diagram_type(question, answer)
   diagram_type = diagram_type_info["diagramType"]
   diagram_type_reason = diagram_type_info["thoughts"]
-  print("Diagram Type:", diagram_type)
+  # print("Diagram Type:", diagram_type)
   # print("Diagram Type Reason:", diagram_type_reason)
 
   # Get the corresponding documentation for the determined diagram type
@@ -308,3 +329,8 @@ with open(test_filename, 'w', encoding='utf-8') as file:
 
 print(f'Training dataset created and saved to {train_filename}')
 print(f'Testing dataset created and saved to {test_filename}')
+
+with api_usage_lock:
+  print(f"Total API Usage: Prompt tokens: {api_usage['prompt_tokens']}, "
+    f"Completion tokens: {api_usage['completion_tokens']}, "
+    f"Total tokens: {api_usage['total_tokens']}")

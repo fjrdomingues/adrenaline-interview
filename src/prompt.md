@@ -12,178 +12,683 @@ Make sure to below the instructions and examples in the syntax documentation
 You MUST produce valid mermaidJS syntax!
 
 # Question - Question from the user
-How do you authenticate with bearer token?
+How can you ensure that state is updated immutably when filtering out data?
 
 # Answer - Answer given to the user
+### Updating State Immutably when Filtering Data:
+When filtering out data from an array in React state, it's important to update the state immutably to ensure that React detects the change and triggers re-renders correctly. Here's how you can ensure that the state is updated immutably when filtering out data:
 
-To authenticate with a bearer token when using the FortiGate API, you follow a specific process that involves modifying the request headers to include the token. The codebase provides a method specifically for handling bearer token authentication, which is part of the login process in the [`FortiGateBase`](fortigate_api/fortigate_base.py#L133-L175) class.
+1. **Using the Spread Operator**:
+   - Create a new array by spreading the existing data array and filtering out the data to be removed.
+   - Set the state with the new array to maintain immutability.
 
-Here's an outline of the steps involved in bearer token authentication:
+   ```javascript
+   function handleDeleteComments(commentId) {
+     const updatedData = data.filter((comment) => comment.id !== commentId);
+     setData([...updatedData]);
+   }
+   ```
 
-1. Create a new session using the `requests.session()` method.
-2. Construct the URL for a test endpoint to validate the token, such as `/api/v2/cmdb/system/status`.
-3. Add the `Authorization: Bearer <token>` header to the request. This is done using the [`_bearer_token`](fortigate_api/fortigate_base.py#L198-L200) method, which constructs the header by appending the token to the `Bearer` prefix.
-4. Send a GET request to the test endpoint with the header included.
-5. Check the response to ensure the authentication was successful. If the request fails, it raises an exception.
+2. **Using Array.prototype.slice()**:
+   - Use `slice()` to create a shallow copy of the data array and then filter out the data.
+   - Set the state with the new array to ensure immutability.
 
-Below is a simplified version of the code that demonstrates how bearer token authentication is implemented:
+   ```javascript
+   function handleDeleteComments(commentId) {
+     const updatedData = data.slice().filter((comment) => comment.id !== commentId);
+     setData(updatedData);
+   }
+   ```
 
-```type:Quoted,lang:Python,path:fortigate_api/fortigate_base.py,lines:144-155
-# token
-if self.token:
-    try:
-        response: Response = session.get(
-            url=f"{self.url}/api/v2/cmdb/system/status",
-            headers=self._bearer_token(),
-            verify=self.verify,
-        )
-    except Exception as ex:
-        raise self._hide_secret_ex(ex)
-    response.raise_for_status()
-    self._session = session
-    return
-```
+3. **Using Array.prototype.filter() with Object Spread**:
+   - If the data structure is more complex (e.g., nested objects), you can use object spread to maintain immutability.
 
+   ```javascript
+   function handleDeleteComments(commentId) {
+     const updatedData = data.map((comment) => {
+       if (comment.id !== commentId) {
+         return { ...comment };
+       }
+     }).filter(Boolean); // Filter out undefined values
+     setData(updatedData);
+   }
+   ```
 
-This code snippet is part of the [`login`](fortigate_api/fortigate_base.py#L133-L175) method. It shows how to authenticate using a bearer token by sending a request to the FortiGate API with the token included in the headers.
+By following these approaches and ensuring that the state is updated immutably when filtering out data, you can maintain the integrity of the React state and trigger re-renders effectively.
 
 # DiagramType - Diagram type that you must use and why it was chosen
-Diagram Type: sequenceDiagram
-Reasoning: The process described involves a sequence of actions and interactions between the user, the code (or system), and the API endpoint. A sequence diagram is ideal for illustrating this order of operations and the flow of messages (requests and responses) between the entities involved. Specifically, it can depict the method calls, the preparation of the request with the bearer token, the submission of the request to the API, and finally, the handling of the API's response. This makes the sequence diagram the most suitable choice for visualizing the authentication process with a bearer token.
+Diagram Type: flowchart
+Reasoning: The answer describes a process with sequential steps on how to update state immutably when filtering out data. A flowchart is suitable for illustrating these steps and decision points, such as choosing between different methods (Spread Operator, slice(), filter() with Object Spread) for updating the state. It can visually represent the flow of operations, making it easier to understand the sequence of actions and decisions involved in the process.
 
 # DiagramTypeDocs - Syntax documentation to build the diagram
 
-> A Sequence diagram is an interaction diagram that shows how processes operate with one another and in what order.
+Flowcharts are composed of **nodes** (geometric shapes) and **edges** (arrows or lines). The Mermaid code defines how nodes and edges are made and accommodates different arrow types, multi-directional arrows, and any linking to and from subgraphs.
 
-Mermaid can render sequence diagrams.
+```warning
+If you are using the word "end" in a Flowchart node, capitalize the entire word or any of the letters (e.g., "End" or "END"), or apply this [workaround](https://github.com/mermaid-js/mermaid/issues/1444#issuecomment-639528897). Typing "end" in all lowercase letters will break the Flowchart.
+```
+
+```warning
+If you are using the letter "o" or "x" as the first letter in a connecting Flowchart node, add a space before the letter or capitalize the letter (e.g., "dev--- ops", "dev---Ops").
+
+Typing "A---oB" will create a [circle edge](#circle-edge-example).
+
+Typing "A---xB" will create a [cross edge](#cross-edge-example).
+```
+
+### A node (default)
 
 ```mermaid-example
-sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
+---
+title: Node
+---
+flowchart LR
+    id
 ```
 
 ```note
-A note on nodes, the word "end" could potentially break the diagram, due to the way that the mermaid language is scripted.
-
-If unavoidable, one must use parentheses(), quotation marks "", or brackets {},[], to enclose the word "end". i.e : (end), [end], {end}.
+The id is what is displayed in the box.
 ```
 
-## Syntax
+```tip
+Instead of `flowchart` one can also use `graph`.
+```
 
-### Participants
+### A node with text
 
-The participants can be defined implicitly as in the first example on this page. The participants or actors are
-rendered in order of appearance in the diagram source text. Sometimes you might want to show the participants in a
-different order than how they appear in the first message. It is possible to specify the actor's order of
-appearance by doing the following:
+It is also possible to set text in the box that differs from the id. If this is done several times, it is the last text
+found for the node that will be used. Also if you define edges for the node later on, you can omit text definitions. The
+one previously defined will be used when rendering the box.
 
 ```mermaid-example
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>Bob: Hi Bob
-    Bob->>Alice: Hi Alice
+---
+title: Node with text
+---
+flowchart LR
+    id1[This is the text in the box]
 ```
 
-### Actors
+#### Unicode text
 
-If you specifically want to use the actor symbol instead of a rectangle with text you can do so by using actor statements as per below.
+Use `"` to enclose the unicode text.
 
 ```mermaid-example
-sequenceDiagram
-    actor Alice
-    actor Bob
-    Alice->>Bob: Hi Bob
-    Bob->>Alice: Hi Alice
+flowchart LR
+    id["This ❤ Unicode"]
 ```
 
-### Aliases
+#### Markdown formatting
 
-The actor can have a convenient identifier and a descriptive label.
+Use double quotes and backticks "\` text \`" to enclose the markdown text.
 
 ```mermaid-example
-sequenceDiagram
-    participant A as Alice
-    participant J as John
-    A->>J: Hello John, how are you?
-    J->>A: Great!
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+    markdown["`This **is** _Markdown_`"]
+    newLines["`Line1
+    Line 2
+    Line 3`"]
+    markdown --> newLines
 ```
 
-### Actor Creation and Destruction (v10.3.0+)
+### Direction
 
-It is possible to create and destroy actors by messages. To do so, add a create or destroy directive before the message.
+This statement declares the direction of the Flowchart.
 
-```
-create participant B
-A --> B: Hello
-```
-
-Create directives support actor/participant distinction and aliases. The sender or the recipient of a message can be destroyed but only the recipient can be created.
+This declares the flowchart is oriented from top to bottom (`TD` or `TB`).
 
 ```mermaid-example
-sequenceDiagram
-    Alice->>Bob: Hello Bob, how are you ?
-    Bob->>Alice: Fine, thank you. And you?
-    create participant Carl
-    Alice->>Carl: Hi Carl!
-    create actor D as Donald
-    Carl->>D: Hi!
-    destroy Carl
-    Alice-xCarl: We are too many
-    destroy Bob
-    Bob->>Alice: I agree
+flowchart TD
+    Start --> Stop
 ```
 
-#### Unfixable actor/participant creation/deletion error
+This declares the flowchart is oriented from left to right (`LR`).
 
-If an error of the following type occurs when creating or deleting an actor/participant:
+```mermaid-example
+flowchart LR
+    Start --> Stop
+```
 
-> The destroyed participant **participant-name** does not have an associated destroying message after its declaration. Please check the sequence diagram.
+Possible FlowChart orientations are:
 
-And fixing diagram code does not get rid of this error and rendering of all other diagrams results in the same error, then you need to update the mermaid version to (v10.7.0+).
+- TB - Top to bottom
+- TD - Top-down/ same as top to bottom
+- BT - Bottom to top
+- RL - Right to left
+- LR - Left to right
 
-### Grouping / Box
+## Node shapes
 
-The actor(s) can be grouped in vertical boxes. You can define a color (if not, it will be transparent) and/or a descriptive label using the following notation:
+### A node with round edges
+
+```mermaid-example
+flowchart LR
+    id1(This is the text in the box)
+```
+
+### A stadium-shaped node
+
+```mermaid-example
+flowchart LR
+    id1([This is the text in the box])
+```
+
+### A node in a subroutine shape
+
+```mermaid-example
+flowchart LR
+    id1[[This is the text in the box]]
+```
+
+### A node in a cylindrical shape
+
+```mermaid-example
+flowchart LR
+    id1[(Database)]
+```
+
+### A node in the form of a circle
+
+```mermaid-example
+flowchart LR
+    id1((This is the text in the circle))
+```
+
+### A node in an asymmetric shape
+
+```mermaid-example
+flowchart LR
+    id1>This is the text in the box]
+```
+
+Currently only the shape above is possible and not its mirror. _This might change with future releases._
+
+### A node (rhombus)
+
+```mermaid-example
+flowchart LR
+    id1{This is the text in the box}
+```
+
+### A hexagon node
+
+```mermaid-example
+flowchart LR
+    id1{{This is the text in the box}}
+```
+
+### Parallelogram
+
+```mermaid-example
+flowchart TD
+    id1[/This is the text in the box/]
+```
+
+### Parallelogram alt
+
+```mermaid-example
+flowchart TD
+    id1[\This is the text in the box\]
+```
+
+### Trapezoid
+
+```mermaid-example
+flowchart TD
+    A[/Christmas\]
+```
+
+### Trapezoid alt
+
+```mermaid-example
+flowchart TD
+    B[\Go shopping/]
+```
+
+### Double circle
+
+```mermaid-example
+flowchart TD
+    id1(((This is the text in the circle)))
+```
+
+## Links between nodes
+
+Nodes can be connected with links/edges. It is possible to have different types of links or attach a text string to a link.
+
+### A link with arrow head
+
+```mermaid-example
+flowchart LR
+    A-->B
+```
+
+### An open link
+
+```mermaid-example
+flowchart LR
+    A --- B
+```
+
+### Text on links
+
+```mermaid-example
+flowchart LR
+    A-- This is the text! ---B
+```
+
+or
+
+```mermaid-example
+flowchart LR
+    A---|This is the text|B
+```
+
+### A link with arrow head and text
+
+```mermaid-example
+flowchart LR
+    A-->|text|B
+```
+
+or
+
+```mermaid-example
+flowchart LR
+    A-- text -->B
+```
+
+### Dotted link
+
+```mermaid-example
+flowchart LR
+   A-.->B;
+```
+
+### Dotted link with text
+
+```mermaid-example
+flowchart LR
+   A-. text .-> B
+```
+
+### Thick link
+
+```mermaid-example
+flowchart LR
+   A ==> B
+```
+
+### Thick link with text
+
+```mermaid-example
+flowchart LR
+   A == text ==> B
+```
+
+### An invisible link
+
+This can be a useful tool in some instances where you want to alter the default positioning of a node.
+
+```mermaid-example
+flowchart LR
+    A ~~~ B
+```
+
+### Chaining of links
+
+It is possible declare many links in the same line as per below:
+
+```mermaid-example
+flowchart LR
+   A -- text --> B -- text2 --> C
+```
+
+It is also possible to declare multiple nodes links in the same line as per below:
+
+```mermaid-example
+flowchart LR
+   a --> b & c--> d
+```
+
+You can then describe dependencies in a very expressive way. Like the one-liner below:
+
+```mermaid-example
+flowchart TB
+    A & B--> C & D
+```
+
+If you describe the same diagram using the basic syntax, it will take four lines. A
+word of warning, one could go overboard with this making the flowchart harder to read in
+markdown form. The Swedish word `lagom` comes to mind. It means, not too much and not too little.
+This goes for expressive syntaxes as well.
+
+```mermaid
+flowchart TB
+    A --> C
+    A --> D
+    B --> C
+    B --> D
+```
+
+## New arrow types
+
+There are new types of arrows supported:
+
+- circle edge
+- cross edge
+
+### Circle edge example
+
+```mermaid-example
+flowchart LR
+    A --o B
+```
+
+### Cross edge example
+
+```mermaid-example
+flowchart LR
+    A --x B
+```
+
+## Multi directional arrows
+
+There is the possibility to use multidirectional arrows.
+
+```mermaid-example
+flowchart LR
+    A o--o B
+    B <--> C
+    C x--x D
+```
+
+### Minimum length of a link
+
+Each node in the flowchart is ultimately assigned to a rank in the rendered
+graph, i.e. to a vertical or horizontal level (depending on the flowchart
+orientation), based on the nodes to which it is linked. By default, links
+can span any number of ranks, but you can ask for any link to be longer
+than the others by adding extra dashes in the link definition.
+
+In the following example, two extra dashes are added in the link from node _B_
+to node _E_, so that it spans two more ranks than regular links:
+
+```mermaid-example
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+```
+
+> **Note** Links may still be made longer than the requested number of ranks
+> by the rendering engine to accommodate other requests.
+
+When the link label is written in the middle of the link, the extra dashes must
+be added on the right side of the link. The following example is equivalent to
+the previous one:
+
+```mermaid-example
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    C --> D[Rethink]
+    D --> B
+    B -- No ----> E[End]
+```
+
+For dotted or thick links, the characters to add are equals signs or dots,
+as summed up in the following table:
+
+| Length            |   1    |    2    |    3     |
+| ----------------- | :----: | :-----: | :------: |
+| Normal            | `---`  | `----`  | `-----`  |
+| Normal with arrow | `-->`  | `--->`  | `---->`  |
+| Thick             | `===`  | `====`  | `=====`  |
+| Thick with arrow  | `==>`  | `===>`  | `====>`  |
+| Dotted            | `-.-`  | `-..-`  | `-...-`  |
+| Dotted with arrow | `-.->` | `-..->` | `-...->` |
+
+## Special characters that break syntax
+
+It is possible to put text within quotes in order to render more troublesome characters. As in the example below:
+
+```mermaid-example
+flowchart LR
+    id1["This is the (text) in the box"]
+```
+
+### Entity codes to escape characters
+
+It is possible to escape characters using the syntax exemplified here.
+
+```mermaid-example
+    flowchart LR
+        A["A double quote:#quot;"] --> B["A dec char:#9829;"]
+```
+
+Numbers given are base 10, so `#` can be encoded as `#35;`. It is also supported to use HTML character names.
+
+## Subgraphs
 
 ```
-box Aqua Group Description
-... actors ...
+subgraph title
+    graph definition
 end
-box Group without description
-... actors ...
+```
+
+An example below:
+
+```mermaid-example
+flowchart TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
+```
+
+You can also set an explicit id for the subgraph.
+
+```mermaid-example
+flowchart TB
+    c1-->a2
+    subgraph ide1 [one]
+    a1-->a2
+    end
+```
+
+### flowcharts
+
+With the graphtype flowchart it is also possible to set edges to and from subgraphs as in the flowchart below.
+
+```mermaid-example
+flowchart TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
+    one --> two
+    three --> two
+    two --> c2
+```
+
+### Direction in subgraphs
+
+With the graphtype flowcharts you can use the direction statement to set the direction which the subgraph will render like in this example.
+
+```mermaid-example
+flowchart LR
+  subgraph TOP
+    direction TB
+    subgraph B1
+        direction RL
+        i1 -->f1
+    end
+    subgraph B2
+        direction BT
+        i2 -->f2
+    end
+  end
+  A --> TOP --> B
+  B1 --> B2
+```
+
+#### Limitation
+
+If any of a subgraph's nodes are linked to the outside, subgraph direction will be ignored. Instead the subgraph will inherit the direction of the parent graph:
+
+```mermaid-example
+flowchart LR
+    subgraph subgraph1
+        direction TB
+        top1[top] --> bottom1[bottom]
+    end
+    subgraph subgraph2
+        direction TB
+        top2[top] --> bottom2[bottom]
+    end
+    %% ^ These subgraphs are identical, except for the links to them:
+
+    %% Link *to* subgraph1: subgraph1 direction is maintained
+    outside --> subgraph1
+    %% Link *within* subgraph2:
+    %% subgraph2 inherits the direction of the top-level graph (LR)
+    outside ---> top2
+```
+
+## Markdown Strings
+
+The "Markdown Strings" feature enhances flowcharts and mind maps by offering a more versatile string type, which supports text formatting options such as bold and italics, and automatically wraps text within labels.
+
+```mermaid-example
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+subgraph "One"
+  a("`The **cat**
+  in the hat`") -- "edge label" --> b{{"`The **dog** in the hog`"}}
 end
-box rgb(33,66,99)
-... actors ...
+subgraph "`**Two**`"
+  c("`The **cat**
+  in the hat`") -- "`Bold **edge label**`" --> d("The dog in the hog")
 end
 ```
+
+Formatting:
+
+- For bold text, use double asterisks (`**`) before and after the text.
+- For italics, use single asterisks (`*`) before and after the text.
+- With traditional strings, you needed to add `<br>` tags for text to wrap in nodes. However, markdown strings automatically wrap text when it becomes too long and allows you to start a new line by simply using a newline character instead of a `<br>` tag.
+
+This feature is applicable to node labels, edge labels, and subgraph labels.
+
+## Interaction
+
+It is possible to bind a click event to a node, the click can lead to either a javascript callback or to a link which will be opened in a new browser tab.
 
 ```note
-If your group name is a color you can force the color to be transparent:
+This functionality is disabled when using `securityLevel='strict'` and enabled when using `securityLevel='loose'`.
 ```
 
 ```
-box transparent Aqua
-... actors ...
-end
+click nodeId callback
+click nodeId call callback()
 ```
+
+- nodeId is the id of the node
+- callback is the name of a javascript function defined on the page displaying the graph, the function will be called with the nodeId as parameter.
+
+Examples of tooltip usage below:
+
+```html
+<script>
+  const callback = function () {
+    alert('A callback was triggered');
+  };
+</script>
+```
+
+The tooltip text is surrounded in double quotes. The styles of the tooltip are set by the class `.mermaidTooltip`.
 
 ```mermaid-example
-    sequenceDiagram
-    box Purple Alice & John
-    participant A
-    participant J
-    end
-    box Another Group
-    participant B
-    participant C
-    end
-    A->>J: Hello John, how are you?
-    J->>A: Great!
-    A->>B: Hello Bob, how is Charley?
-    B->>C: Hello Charley, how are you?
+flowchart LR
+    A-->B
+    B-->C
+    C-->D
+    click A callback "Tooltip for a callback"
+    click B "https://www.github.com" "This is a tooltip for a link"
+    click C call callback() "Tooltip for a callback"
+    click D href "https://www.github.com" "This is a tooltip for a link"
+```
+
+> **Success** The tooltip functionality and the ability to link to urls are available from version 0.5.2.
+
+?> Due to limitations with how Docsify handles JavaScript callback functions, an alternate working demo for the above code can be viewed at [this jsfiddle](https://jsfiddle.net/Ogglas/2o73vdez/7).
+
+Links are opened in the same browser tab/window by default. It is possible to change this by adding a link target to the click definition (`_self`, `_blank`, `_parent` and `_top` are supported):
+
+```mermaid-example
+flowchart LR
+    A-->B
+    B-->C
+    C-->D
+    D-->E
+    click A "https://www.github.com" _blank
+    click B "https://www.github.com" "Open this in a new tab" _blank
+    click C href "https://www.github.com" _blank
+    click D href "https://www.github.com" "Open this in a new tab" _blank
+```
+
+Beginner's tip—a full example using interactive links in a html context:
+
+```html
+<body>
+  <pre class="mermaid">
+    flowchart LR
+        A-->B
+        B-->C
+        C-->D
+        click A callback "Tooltip"
+        click B "https://www.github.com" "This is a link"
+        click C call callback() "Tooltip"
+        click D href "https://www.github.com" "This is a link"
+  </pre>
+
+  <script>
+    const callback = function () {
+      alert('A callback was triggered');
+    };
+    const config = {
+      startOnLoad: true,
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'cardinal' },
+      securityLevel: 'loose',
+    };
+    mermaid.initialize(config);
+  </script>
+</body>
+```
+
+### Comments
+
+Comments can be entered within a flow diagram, which will be ignored by the parser. Comments need to be on their own line, and must be prefaced with `%%` (double percent signs). Any text after the start of the comment to the next newline will be treated as a comment, including any flow syntax
+
+```mermaid
+flowchart LR
+%% this is a comment A -- text --> B{node}
+   A -- text --> B -- text2 --> C
 ```
 
 

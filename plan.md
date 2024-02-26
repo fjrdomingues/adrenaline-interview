@@ -21,6 +21,7 @@
     - Diagram type documentation (should we include the docs or not? - probably not) (ok to have the docs if in inference we don't need to send the docs)
 - Evaluate performance of fine-tuned model:
   - Check for syntax validity (how many failed attempts with GPT-4 vs with fine-tuned model?)
+  - Test performance of models with and without the documentation in the prompt
   - Ask GPT-4 to evaluate a subset
   - Choose random scenarios and documentation a subjective comparison between results of both models
 
