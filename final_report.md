@@ -272,8 +272,19 @@ This was what was possible to achieve in a few days challenge but there are many
 
 - Generate a bigger dataset - training with less than 50 samples is not ideal
 - Generate the dataset with the CLI validator instead of the npm package, which is not working properly
-- Fine-tune the model for longer than 100 steps
+- Fine-tune the model for longer (more steps)
 - Better curate the mermaidJS documentation and write it in a format better suited to LLMs, with examples for corner cases where the model usually struggles
 - Break-down the process in multiple calls to the model when generating each diagram
 
 Another note, and reaching outside of the scope of this project, is that it could be worth to explore different type of visualization depending on the topic being asked. The Quality of the output seem to be more influenced by that than the quality of the models.
+
+# Round 2!
+
+Not satisfied by the results just yet, I fine-tuned a new model that got an Accuracy of 79% (against the previous 71% of gpt-4) on a random sample of 100 items, and 81% of another test with 50 samples (for a better test we should compare using the same sample on both models, not done this time because of costs).
+
+This improvement was achieved by:
+
+- Increasing the dataset by providing examples where the model usually fails. I manually fixed diagrams that were generated with a wrong syntax and added the fixed diagram to the new dataset (new_dataset_full.jsonl)
+- The number of Epochs/training steps was increased to 5. This is vital for the results and looking at the training_loss, it could try training a model for longer because and see if we start getting a stable loss value.
+
+Overall, it seems that we can keep increasing the performance of the model by improving the dataset and training for longer.
