@@ -13,6 +13,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 import re
+import time
+
 print("Current Working Directory:", os.getcwd())
 
 
@@ -114,15 +116,24 @@ evaluation_results = []
 # Counters for success rates
 first_model_success = 0
 second_model_success = 0
+first_model_time_taken = 0
+second_model_time_taken = 0
 
 # Evaluate each model on the selected samples
 for i, sample in enumerate(sample_data):
     question = sample['question']
     answer = sample['answer']
     
-    # Get diagrams from both models
+    # Get diagrams from both models and measure time to reply
+    start_time = time.time()
     first_model_diagram = build_diagram(first_model_name, question, answer)
+    end_time = time.time()
+    first_model_elapsed = end_time - start_time
+
+    start_time = time.time()
     second_model_diagram = build_diagram(second_model_name, question, answer)
+    end_time = time.time()
+    second_model_elapsed = end_time - start_time
     
     # Validate diagrams
     first_model_valid = validate_diagram(first_model_diagram)
@@ -133,6 +144,9 @@ for i, sample in enumerate(sample_data):
         first_model_success += 1
     if second_model_valid:
         second_model_success += 1
+
+    first_model_time_taken += first_model_elapsed
+    second_model_time_taken += second_model_elapsed
     
     # Store the results
     result = {
@@ -142,17 +156,19 @@ for i, sample in enumerate(sample_data):
         "gpt-4-turbo": {
             "name": first_model_name,
             "diagram": first_model_diagram,
-            "valid_syntax": first_model_valid
+            "valid_syntax": first_model_valid,
+            "response_time": first_model_elapsed,
         },
         "fine-tuned-gpt-3.5": {
             "name": second_model_name,
             "diagram": second_model_diagram,
-            "valid_syntax": second_model_valid
+            "valid_syntax": second_model_valid,
+            "response_time": second_model_elapsed,
         }
     }
     print(i)
-    print("Model: ", first_model_name, "success: ", first_model_success)
-    print("Model: ", second_model_name, "success: ", second_model_success)
+    print("Model: ", first_model_name, "success: ", first_model_success, "time taken: ", first_model_elapsed)
+    print("Model: ", second_model_name, "success: ", second_model_success, "time taken: ", second_model_elapsed)
     evaluation_results.append(result)
 
 # Save the evaluation results to a file
