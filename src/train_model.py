@@ -29,7 +29,10 @@ def start_fine_tuning(training_file_id, model="gpt-3.5-turbo"):
     """
     job = client.fine_tuning.jobs.create(
         training_file=training_file_id,
-        model=model
+        model=model,
+        hyperparameters={
+            "n_epochs":5
+        }
     )
     return job
 
@@ -67,12 +70,15 @@ def delete_fine_tuned_model(model_id):
 
 
 if __name__ == "__main__":
-    job_id = "ftjob-isQ08USSF94GFKlg40CE5zgc"
+    job_id = None
+    # To retrieve info on existing job instead of creating new
+    job_id = "ftjob-Do4PRbt1nvZRxP9wCC4bhTIb"
 
     if not job_id:
       # Step 1: Upload training and testing datasets
-      training_file_id = upload_file('../data/training_dataset.jsonl')
-      testing_file_id = upload_file('../data/testing_dataset.jsonl')
+      training_file_id = upload_file('../data/new_dataset_full.jsonl')
+      # Second time we are training without a testing file
+    #   testing_file_id = upload_file('../data/testing_dataset.jsonl')
 
       # Step 2: Start fine-tuning the model
       fine_tune_job = start_fine_tuning(training_file_id)
@@ -104,4 +110,6 @@ if __name__ == "__main__":
         print("Fine-tuning job failed.")
 
 
-# Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wWjQ3wc
+# 1st Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wWjQ3wc
+# 2nd Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wuvvao7
+# 3rd Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wvZLMsE

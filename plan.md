@@ -23,7 +23,10 @@
   - Check for syntax validity (how many failed attempts with GPT-4 vs with fine-tuned model?)
   - Test performance of models with and without the documentation in the prompt
   - Ask GPT-4 to evaluate a subset
-  - Choose random scenarios and documentation a subjective comparison between results of both models
+  - Choose random scenarios and document a subjective comparison between results of both models
 
 - Try and compare different approaches
   - Fine-tune an OSS model like mistral or other models that are good with code
+
+
+New Idea: manually fix the failed generations and add those examples to the dataset. That should allow gpt to fine-tune on corner cases
