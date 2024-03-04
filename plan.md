@@ -30,3 +30,12 @@
 
 
 New Idea: manually fix the failed generations and add those examples to the dataset. That should allow gpt to fine-tune on corner cases
+
+
+# Round 2
+
+Based on the experience and feedback I need to improve the following:
+- Dataset needs to be bigger
+  - I can try to create a parser/fixer to transform failed generations on the original dataset into valid diagrams that can be used for training
+- Training and Testing dataset MUST be separated
+- The examples on the dataset need to be heterogeneous (may not be needed if we get consistent results on random tests)
