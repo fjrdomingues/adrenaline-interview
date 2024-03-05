@@ -15,7 +15,7 @@ import os
 import re
 import time
 from datetime import datetime
-
+from diagram_validator import validate_diagram
 
 print("Current Working Directory:", os.getcwd())
 
@@ -75,36 +75,6 @@ f'''# Question - Question from the user
     diagram = response.choices[0].message.content
     print(diagram)
     return diagram
-
-# Function to validate a MermaidJS diagram
-def validate_diagram(markdown_code):
-    try:
-        # Extract the Mermaid code block from Markdown (assuming it's well formed)
-        match = re.search(r'```mermaid([^`]*)```', markdown_code, re.DOTALL)
-        if not match:
-            print("No valid Mermaid diagram code block found.")
-            return False
-        
-        diagram_code = match.group(1).strip()  # Extracted Mermaid code
-
-        # The NODE package doesn't work properly. It rejects some valid diagrams! CLI is performing better
-        process = subprocess.run(
-            ['mmdc', '--input', '-'],
-            input=diagram_code, 
-            text=True, 
-            capture_output=True, 
-            check=True,
-            timeout=30
-        )
-
-        print("STDOUT:", process.stdout.strip())
-        return process.stdout.strip() == 'Generating single mermaid chart'
-    except subprocess.CalledProcessError as e:
-        print("CalledProcessError:", e)
-        return False
-    except subprocess.TimeoutExpired as e:
-        print("TimeoutExpired:", e)
-        return False
 
 # Load the dataset
 with open(input_filename, 'r', encoding='utf-8') as file:

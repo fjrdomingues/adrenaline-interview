@@ -39,3 +39,7 @@ Based on the experience and feedback I need to improve the following:
   - I can try to create a parser/fixer to transform failed generations on the original dataset into valid diagrams that can be used for training
 - Training and Testing dataset MUST be separated
 - The examples on the dataset need to be heterogeneous (may not be needed if we get consistent results on random tests)
+- Ask model to output diagrams without markdown
+- After the first results, make a report on frequent errors found: https://docs.google.com/document/d/1365nJgl0dLyo8gzXpi_P_2U-TsIPezsa8FY6t9XrJYI/edit?pli=1
+
+Goal: 89 to 91%
