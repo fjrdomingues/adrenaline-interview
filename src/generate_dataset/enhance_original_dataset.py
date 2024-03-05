@@ -19,7 +19,7 @@ from diagram_validator import validate_diagram
 
 # Define the filenames
 input_filename = '../../data/mermaid_dataset_public.json'
-output_filename = '../../data/mermaid_dataset_with_validity.json'
+output_filename = 'mermaid_dataset_with_validity.json'
 
 # Open and read the JSON file
 with open(input_filename, 'r', encoding='utf-8') as file:
