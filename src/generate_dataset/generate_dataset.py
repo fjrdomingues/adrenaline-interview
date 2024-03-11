@@ -1,6 +1,6 @@
 """
 This script validates diagrams in the original dataset and attempts to fix them if necessary.
-It creates a new dataset with the validity information and any fixed diagrams.
+It creates a new dataset with the validity information and the fixed diagrams. This will be used to teach the model how to handle use-cases where it usually fails.
 """
 #%%
 import sys
@@ -18,6 +18,11 @@ modules_dir = os.path.normpath(modules_dir)
 
 if modules_dir not in sys.path:
     sys.path.append(modules_dir)
+
+# Import the necessary modules
+from diagram_validator import validate_diagram
+from mermaid_fixer import fix_mermaid_syntax
+from mermaid_md_extractor import extract_mermaid_code
 
 def load_json_file(filename):
     with open(filename, 'r', encoding='utf-8') as file:
@@ -44,7 +49,7 @@ count = 0
 fixed_count = 0
 # %%
 
-## Loop to enhance dataset. This is process takes ~15 minutes because mermaid CLI is slow to validate diagrams
+## Loop to enhance dataset. This is process takes ~30 minutes because mermaid CLI is slow to validate diagrams
 for obj in full_data:
     # Validate the original diagram and store the result.
     diagram = obj.get('mermaid', None)
@@ -70,6 +75,7 @@ for obj in full_data:
             obj['diagram_fixed'] = True
             fixed_count += 1
         else:
+            obj['diagram_fixed'] = False
             print("Diagram not fixed")
     # Include the cleaned/fixed diagram if diagrams were processed
     if cleaned_diagram:
@@ -91,9 +97,8 @@ print(f'Number of diagrams fixed: {fixed_count}')
 
 """
 Now with the enhanced dataset, we'll try to run a fine-tuning using the invalid diagrams that were fixed with success. 
-This may teach the model how to handle use-case that it usually gets wrong.
+For the testing data, we'll also add a few valid examples (diagram that didn't need fixing) to validate that the model is not overfitting on the diagrams with special chars
 """
-
 
 #%%
 # Load the enhanced dataset

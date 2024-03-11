@@ -5,7 +5,7 @@ To understand how the dataset looks at the moment
 import json
 
 # Path to the JSON file
-file_path = 'mermaid_dataset_with_fixed_diagrams.json'
+file_path = 'mermaid_dataset_enhanced.json'
 
 # Read the json file
 with open(file_path, 'r') as file:

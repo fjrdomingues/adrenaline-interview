@@ -14,24 +14,33 @@ from dotenv import load_dotenv
 import os
 import re
 import time
+import sys
 from datetime import datetime
+
+# Get the current script's directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the 'modules' directory
+modules_dir = os.path.join(current_dir, 'modules')
+
+# Normalize the path (resolve "..")
+modules_dir = os.path.normpath(modules_dir)
+
+if modules_dir not in sys.path:
+    sys.path.append(modules_dir)
+
 from diagram_validator import validate_diagram
-
-print("Current Working Directory:", os.getcwd())
-
 
 # Define the number of samples to evaluate
 NUM_SAMPLES = 100  # number of random samples to evaluate on
 
 # Specify the models to compare
 first_model_name = "gpt-4-0125-preview"
-second_model_name = "ft:gpt-3.5-turbo-0613:rubrick-ai::8wvZLMsE"
+second_model_name = "ft:gpt-3.5-turbo-0125:rubrick-ai::90WfxOdm"
 
 # Define the filenames
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-input_filename = '../data/mermaid_dataset_public.json'
+input_filename = 'generate_dataset/testing_dataset.jsonl'
 evaluation_filename = f'../data/evaluation_results_{timestamp}.json'  # unique filename with timestamp
-mermaid_js_path = 'validate_mermaid.js'
 
 # Load environment variables from .env file
 load_dotenv()
@@ -39,30 +48,7 @@ load_dotenv()
 client = OpenAI()
 
 # Function to ask a model to build a MermaidJS diagram
-def build_diagram(model_name, question, answer):
-    system = \
-'''Your task is to build a mermaidJS diagram to help users visualize an answer provided to question they did. You'll be provided the "Question" and the "Answer" that was given to the user.
-Your output will be parsed and validate so you must reply with VALID mermaidJS code only and in the following format:
-```mermaid
-{ diagram }
-```
-
-Prefer diagrams with simple syntax
-Avoid styling on the diagram
-Escape characters when needed
-Make sure that you don't use any forbidden mermaid characters
-Make sure to below the instructions and examples in the syntax documentation
-You MUST produce valid mermaidJS syntax!
-'''
-
-    prompt = \
-f'''# Question - Question from the user
-{question}
-
-# Answer - Answer given to the user
-{answer}
-
-# Your output'''
+def build_diagram(model_name, system, prompt):
     response = client.chat.completions.create(
         model=model_name,
         temperature=0,
@@ -73,13 +59,18 @@ f'''# Question - Question from the user
     )
     # print(prompt)
     diagram = response.choices[0].message.content
-    print(diagram)
+    # print(diagram)
     return diagram
 
 # Load the dataset
+full_data = []
 with open(input_filename, 'r', encoding='utf-8') as file:
-    full_data = json.load(file)
+    for line in file:
+        # Parse each line (which is a JSON object) and append to the list
+        full_data.append(json.loads(line))
 
+# Use the entire testing dataset
+NUM_SAMPLES = len(full_data)
 # Randomly select samples from the dataset
 sample_data = random.sample(full_data, NUM_SAMPLES)
 
@@ -146,11 +137,11 @@ second_model_time_taken = 0
 
 # Function to evaluate only 1 of the models
 for i, sample in enumerate(sample_data):
-    question = sample['question']
-    answer = sample['answer']
+    system = sample["messages"][0]["content"]
+    prompt = sample["messages"][1]["content"]
     
     start_time = time.time()
-    second_model_diagram = build_diagram(second_model_name, question, answer)
+    second_model_diagram = build_diagram(second_model_name, system, prompt)
     end_time = time.time()
     second_model_elapsed = end_time - start_time
     
@@ -166,8 +157,8 @@ for i, sample in enumerate(sample_data):
     # Store the results
     result = {
         "sample_index": i,
-        "question": question,
-        "answer": answer,
+        "system": system,
+        "prompt": prompt,
         "fine-tuned-gpt-3.5": {
             "name": second_model_name,
             "diagram": second_model_diagram,

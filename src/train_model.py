@@ -72,13 +72,13 @@ def delete_fine_tuned_model(model_id):
 if __name__ == "__main__":
     job_id = None
     # To retrieve info on existing job instead of creating new
-    job_id = "ftjob-Do4PRbt1nvZRxP9wCC4bhTIb"
+    # job_id = "ftjob-Do4PRbt1nvZRxP9wCC4bhTIb"
 
     if not job_id:
       # Step 1: Upload training and testing datasets
-      training_file_id = upload_file('../data/new_dataset_full.jsonl')
+      training_file_id = upload_file('generate_dataset/training_dataset.jsonl')
       # Second time we are training without a testing file
-    #   testing_file_id = upload_file('../data/testing_dataset.jsonl')
+      # testing_file_id = upload_file('../data/testing_dataset.jsonl')
 
       # Step 2: Start fine-tuning the model
       fine_tune_job = start_fine_tuning(training_file_id)
@@ -94,14 +94,14 @@ if __name__ == "__main__":
         state = status_response.status
         print(f"Fine-tuning job {job_id} is {state}.")
 
-        info = client.fine_tuning.jobs.list_events(fine_tuning_job_id=job_id, limit=10)
+        info = list_fine_tuning_events(job_id, limit=2)
         print(info)
 
         if state in ['succeeded', 'failed', 'cancelled']:
             break
 
-        print("Waiting for 30 seconds before the next status check...")
-        time.sleep(30)  # Wait for 30 seconds before checking the status again
+        print("Waiting for 10 seconds before the next status check...")
+        time.sleep(10) 
 
     # Now the job's final state can be handled
     if status_response.status == 'succeeded':
@@ -113,3 +113,6 @@ if __name__ == "__main__":
 # 1st Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wWjQ3wc
 # 2nd Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wuvvao7
 # 3rd Model created: ft:gpt-3.5-turbo-0613:rubrick-ai::8wvZLMsE
+# 4th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90AIcFvW   # With bigger dataset from the original dataset enhanced with fixed diagrams 
+# 5th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90SmbO1e   # This is similar to model 4 but with a fix on the parser that created unnecessary chars on the training set. There were less items on the training dataset. The fixer was not working on some important use-cases
+# 6th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90WfxOdm   # Better parser

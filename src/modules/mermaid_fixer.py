@@ -18,12 +18,12 @@ def escape_brackets(s):
             if stack and (stack[-1] != '|' or char != '|'):
                 # It's an inner bracket, escape it
                 escaped_string += {
-                    '{': '&#123;',
-                    '[': '&#91;',
-                    '(': '&#40;',
-                    '|': '&#124;',
-                    '"': '&#34;',
-                    "'": '&#39;'
+                    '{': '#123;',
+                    '[': '#91;',
+                    '(': '#40;',
+                    '|': '#124;',
+                    '"': '#34;',
+                    "'": '#39;'
                 }.get(char, char)
             else:
                 escaped_string += char
@@ -45,23 +45,23 @@ def escape_brackets(s):
                 if stack:
                     # It's an inner bracket, escape it
                     escaped_string += {
-                        '}': '&#125;',
-                        ']': '&#93;',
-                        ')': '&#41;',
-                        '"': '&#34;',
-                        "'": '&#39;'
+                        '}': '#125;',
+                        ']': '#93;',
+                        ')': '#41;',
+                        '"': '#34;',
+                        "'": '#39;'
                     }[char]
                 else:
                     escaped_string += char
         else:
-            # # Escape quotes that are not used as brackets
-            # if char in ['"', "'"]:
-            #     escaped_string += {
-            #         '"': '&#34;',
-            #         "'": '&#39;'
-            #     }[char]
-            # else:
-            escaped_string += char
+            # Escape quotes that are not used as brackets
+            if char in ['"', "'"]:
+                escaped_string += {
+                    '"': '#34;',
+                    "'": '#39;'
+                }[char]
+            else:
+                escaped_string += char
 
     return escaped_string
 
@@ -80,23 +80,22 @@ if __name__ == "__main__":
   # Playground
   original_diagram = """
 graph TD
-  Flask(Flask: Python microframework) --> Routes
-  Flask --> Decorators["Decorators (@app.route())"]
-  Flask --> ViewFunctions[View Functions]
-  Flask --> HTMLTemplates[HTML Templates]
-
-  Routes --> |"Define URLs"| Decorators
-  Decorators --> |"Map to"| ViewFunctions
-  ViewFunctions --> |"Execute & Render"| HTMLTemplates
-  
-  HTMLTemplates --> |"Dynamic content"| RenderTemplate["render_template"]
-  ViewFunctions --> RenderTemplate
-  
-  Flask --> VirtualEnvironment[Virtual Environment]
-  VirtualEnvironment --> |"Isolates dependencies"| ProjectStructure[Project Structure]
-
-  ProjectStructure --> |"Organizes"| Code[Python code]
-  ProjectStructure --> |"Separates"| Resources["Resources (HTML, etc.)"]
+  A[Start] --> B[Define Functions]
+  B --> C[add#40;x, y#41;]
+  B --> D[subtract#40;x, y#41;]
+  B --> E[multiply#40;x, y#41;]
+  B --> F[divide#40;x, y#41;]
+  F --> G[Check if y is 0]
+  G -->|Yes| H[Return "Cannot divide by zero!"]
+  G -->|No| I[Return x / y]
+  A --> J[Test the Calculator]
+  J --> K[Set num1 = 10]
+  J --> L[Set num2 = 5]
+  J --> M[Print Results]
+  M --> N[add#40;num1, num2#41;]
+  M --> O[subtract#40;num1, num2#41;]
+  M --> P[multiply#40;num1, num2#41;]
+  M --> N[Use #34;signOut()#34;]
  """
 
   fixed_diagram = fix_mermaid_syntax(original_diagram)
