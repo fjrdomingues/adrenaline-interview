@@ -116,3 +116,4 @@ if __name__ == "__main__":
 # 4th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90AIcFvW   # With bigger dataset from the original dataset enhanced with fixed diagrams 
 # 5th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90SmbO1e   # This is similar to model 4 but with a fix on the parser that created unnecessary chars on the training set. There were less items on the training dataset. The fixer was not working on some important use-cases
 # 6th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90WfxOdm   # Better parser
+# ft:gpt-3.5-turbo-0125:rubrick-ai::91izT8QS - Different dataset. Added examples of brackets not replaced when next to quotes and removed classDef from dataset

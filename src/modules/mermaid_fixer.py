@@ -80,22 +80,11 @@ if __name__ == "__main__":
   # Playground
   original_diagram = """
 graph TD
-  A[Start] --> B[Define Functions]
-  B --> C[add#40;x, y#41;]
-  B --> D[subtract#40;x, y#41;]
-  B --> E[multiply#40;x, y#41;]
-  B --> F[divide#40;x, y#41;]
-  F --> G[Check if y is 0]
-  G -->|Yes| H[Return "Cannot divide by zero!"]
-  G -->|No| I[Return x / y]
-  A --> J[Test the Calculator]
-  J --> K[Set num1 = 10]
-  J --> L[Set num2 = 5]
-  J --> M[Print Results]
-  M --> N[add#40;num1, num2#41;]
-  M --> O[subtract#40;num1, num2#41;]
-  M --> P[multiply#40;num1, num2#41;]
-  M --> N[Use #34;signOut()#34;]
+  A[ActiveTabIndex Check] -->|#34;if (ActiveTabIndex == 0)#34;| B[Responsibility and User Data Fetch]
+  B --> C[Logic for selectedType]
+  C -->|Internal| D[User Data Assignment]
+  C -->|Person| E[Payee Data Assignment]
+  C -->|Company| F[Company Data Assignment]
  """
 
   fixed_diagram = fix_mermaid_syntax(original_diagram)
