@@ -72,7 +72,7 @@ def delete_fine_tuned_model(model_id):
 if __name__ == "__main__":
     job_id = None
     # To retrieve info on existing job instead of creating new
-    # job_id = "ftjob-Do4PRbt1nvZRxP9wCC4bhTIb"
+    job_id = "ftjob-N5llqpz4iRCe0GGrhbFiH7gz"
 
     if not job_id:
       # Step 1: Upload training and testing datasets
@@ -117,3 +117,4 @@ if __name__ == "__main__":
 # 5th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90SmbO1e   # This is similar to model 4 but with a fix on the parser that created unnecessary chars on the training set. There were less items on the training dataset. The fixer was not working on some important use-cases
 # 6th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90WfxOdm   # Better parser
 # ft:gpt-3.5-turbo-0125:rubrick-ai::91izT8QS - Different dataset. Added examples of brackets not replaced when next to quotes and removed classDef from dataset
+# ft:gpt-3.5-turbo-0125:rubrick-ai::91zjG0OH

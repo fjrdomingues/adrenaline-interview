@@ -35,7 +35,7 @@ NUM_SAMPLES = 100  # number of random samples to evaluate on
 
 # Specify the models to compare
 first_model_name = "gpt-4-0125-preview"
-second_model_name = "ft:gpt-3.5-turbo-0125:rubrick-ai::91izT8QS"
+second_model_name = "gpt-4-0125-preview"
 
 # Define the filenames
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
