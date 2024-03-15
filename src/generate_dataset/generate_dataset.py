@@ -7,6 +7,7 @@ import sys
 import os
 import json
 from sklearn.model_selection import train_test_split
+import tiktoken
 
 # Get the current script's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -80,8 +81,9 @@ for obj in full_data:
     # Include the cleaned/fixed diagram if diagrams were processed
     if cleaned_diagram:
         obj['new_diagram'] = fixed_diagram or cleaned_diagram
+
     # Exclude the "source_chunks" key from the object, if present.
-    obj.pop('source_chunks', None)
+    # obj.pop('source_chunks', None)
     
     # Append the updated object to the enhanced data list
     enhanced_data.append(obj)
@@ -104,10 +106,29 @@ For the testing data, we'll also add a few valid examples (diagram that didn't n
 # Load the enhanced dataset
 enhanced_data = load_json_file(output_filename)
 
+# Add the chunks back again if not already in the enhanced_data
+original_data = load_json_file(original_dataset_filename)
+
+## Create a map from original_data for quick lookup based on answer_id
+source_chunks_map = {item['answer_id']: item.get('source_chunks', None) for item in original_data}
+
+## Add the source_chunks to the enhanced_data
+for item in enhanced_data:
+    answer_id = item.get('answer_id', -1)  # default to -1 if not present
+    if answer_id != -1 and answer_id in source_chunks_map:
+        item['source_chunks'] = source_chunks_map[answer_id]
+
+        
 # Filter the fixed diagrams
 fixed_diagrams = [item for item in enhanced_data if item.get('diagram_fixed', False)]
 # Filter the enhanced data for items with originally valid diagrams (assuming 'original_diagram_valid')
 valid_diagrams = [item for item in enhanced_data if item.get('is_diagram_valid', False)]
+
+def get_num_tokens(string: str) -> int:
+    """Returns the number of tokens in a text string."""
+    encoding = tiktoken.get_encoding("cl100k_base")
+    num_tokens = len(encoding.encode(string, disallowed_special=()))
+    return num_tokens
 
 # Define the format function to create JSON Lines entries
 def format_data_for_training(data, system_message):
@@ -118,12 +139,15 @@ def format_data_for_training(data, system_message):
             question = entry['question']
             answer = entry['answer']
             diagram = entry['new_diagram']
+            # Check if the source chunks are too big to be included
+            source_chunks = json.dumps(entry.get('source_chunks', {})) if 'source_chunks' in entry else 'N/A'
+            if get_num_tokens(source_chunks) > 10000:
+                source_chunks = "N/A"
             messages = [
                 {"role": "system", "content": system_message},
-                {"role": "user", "content": f'# Question\n{question}\n\n# Answer\n{answer}\n\n# Your output'},
+                {"role": "user", "content": f'# Question\n{question}\n\n# Answer\n{answer}\n\n# Metadata\n{source_chunks}\n\n# Your output'},
                 {"role": "assistant", "content": diagram}
             ]
-            
             formatted_data.append({"messages": messages})
     return formatted_data
 

@@ -34,8 +34,8 @@ from diagram_validator import validate_diagram
 NUM_SAMPLES = 100  # number of random samples to evaluate on
 
 # Specify the models to compare
-first_model_name = "gpt-4-0125-preview"
-second_model_name = "gpt-4-0125-preview"
+# first_model_name = "gpt-4-0125-preview"
+second_model_name = "ft:gpt-3.5-turbo-0125:rubrick-ai::91zjG0OH"
 
 # Define the filenames
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -53,7 +53,7 @@ def build_diagram(model_name, system, prompt):
         model=model_name,
         temperature=0,
         messages=[
-          {"role": "system", "content": system},
+          {"role": "system", "content": system + " DO NOT add a markdown wrapper around the mermaid diagram"},
           {"role": "user", "content": prompt}
         ]
     )
@@ -181,3 +181,6 @@ second_model_rate = (second_model_success / NUM_SAMPLES) * 100
 print("Evaluation completed")
 # print(f"First model ({first_model_name}) success rate: {first_model_rate}%")
 print(f"Second model ({second_model_name}) success rate: {second_model_rate}%")
+
+
+# Second model (ft:gpt-3.5-turbo-0125:rubrick-ai::91zjG0OH) success rate: 95.33333333333334% --- With chunks added to the testing data
