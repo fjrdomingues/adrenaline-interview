@@ -31,7 +31,7 @@ def start_fine_tuning(training_file_id, model="gpt-3.5-turbo"):
         training_file=training_file_id,
         model=model,
         hyperparameters={
-            "n_epochs":5
+            "n_epochs": 2
         }
     )
     return job
@@ -72,11 +72,11 @@ def delete_fine_tuned_model(model_id):
 if __name__ == "__main__":
     job_id = None
     # To retrieve info on existing job instead of creating new
-    job_id = "ftjob-N5llqpz4iRCe0GGrhbFiH7gz"
+    # job_id = "ftjob-N5llqpz4iRCe0GGrhbFiH7gz"
 
     if not job_id:
       # Step 1: Upload training and testing datasets
-      training_file_id = upload_file('generate_dataset/training_dataset.jsonl')
+      training_file_id = upload_file('rectifier_model/training_dataset.jsonl')
       # Second time we are training without a testing file
       # testing_file_id = upload_file('../data/testing_dataset.jsonl')
 
@@ -118,3 +118,7 @@ if __name__ == "__main__":
 # 6th Model created: ft:gpt-3.5-turbo-0125:rubrick-ai::90WfxOdm   # Better parser
 # ft:gpt-3.5-turbo-0125:rubrick-ai::91izT8QS - Different dataset. Added examples of brackets not replaced when next to quotes and removed classDef from dataset
 # ft:gpt-3.5-turbo-0125:rubrick-ai::91zjG0OH
+
+# Rectifier Models
+# ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U - 2 Epoch 400 steps {'step': 198, 'train_loss': 1.473860322676046e-07, 'total_steps': 400, 'train_mean_token_accuracy': 1.0} - 98% accuracy
+# ft:gpt-3.5-turbo-0125:rubrick-ai::9Fl1jwjL - 6 Epoch 1200 steps {'step': 1195, 'train_loss': 2.167441692790817e-08, 'total_steps': 1200, 'train_mean_token_accuracy': 1.0} - 96% accuracy

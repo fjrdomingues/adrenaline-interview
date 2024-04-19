@@ -1,0 +1,552 @@
+[
+    {
+        "sample_index": 0,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TB\n  base[Base Shape Layer] --> color[Color and Texture Layer]\n  base --> detail[Detail Elements]\n  base --> idCard[ID Card]\n  base --> deco[Decorative Elements]\n\n  color -->|Sets visual theme| base\n  detail --> title[Title Text: \"BUS TICKET\"]\n  detail --> seating[Seating Information]\n  detail --> stitching[Stitching Details]\n\n  idCard --> photo[Photo Placeholder]\n  idCard --> name[Name and ID Number]\n  idCard -.->|Sits atop| base\n  idCard --> border[Subtle Border]\n\n  deco --> busIcon[Bus Icon]\n  deco --> barcode[Barcode]\n\n  title -.->|Near top center| base\n  seating -.->|Bottom detail| base\n  stitching -.->|Edge authenticity| base\n  busIcon -.->|Emphasizes theme| title\n  barcode -.->|Adds authenticity| base\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TB\n  base[Base Shape Layer] --> color[Color and Texture Layer]\n  base --> detail[Detail Elements]\n  base --> idCard[ID Card]\n  base --> deco[Decorative Elements]\n\n  color -->|Sets visual theme| base\n  detail --> title[Title Text: &#34;BUS TICKET&#34;]\n  detail --> seating[Seating Information]\n  detail --> stitching[Stitching Details]\n\n  idCard --> photo[Photo Placeholder]\n  idCard --> name[Name and ID Number]\n  idCard -.->|Sits atop| base\n  idCard --> border[Subtle Border]\n\n  deco --> busIcon[Bus Icon]\n  deco --> barcode[Barcode]\n\n  title -.->|Near top center| base\n  seating -.->|Bottom detail| base\n  stitching -.->|Edge authenticity| base\n  busIcon -.->|Emphasizes theme| title\n  barcode -.->|Adds authenticity| base",
+            "valid_syntax": true,
+            "response_time": 5.6254661083221436
+        }
+    },
+    {
+        "sample_index": 1,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Nginx Configuration File (nginx.conf)] --> B[Events Section]\n  A --> C[HTTP Section]\n  A --> G[Includes]\n  C --> D[Server Block]\n  C --> F[Upstream Section]\n  D --> E[Location Block]\n  B --> H[worker_connections]\n  B --> I[use]\n  C --> J[server]\n  C --> K[location]\n  C --> L[include]\n  D --> M[listen]\n  D --> N[server_name]\n  D --> O[root]\n  E --> P[proxy_pass]\n  E --> Q[try_files]\n  E --> R[rewrite]\n  F --> S[server]\n  F --> T[weight]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Nginx Configuration File #40;nginx.conf#41;] --> B[Events Section]\n  A --> C[HTTP Section]\n  A --> G[Includes]\n  C --> D[Server Block]\n  C --> F[Upstream Section]\n  D --> E[Location Block]\n  B --> H[worker_connections]\n  B --> I[use]\n  C --> J[server]\n  C --> K[location]\n  C --> L[include]\n  D --> M[listen]\n  D --> N[server_name]\n  D --> O[root]\n  E --> P[proxy_pass]\n  E --> Q[try_files]\n  E --> R[rewrite]\n  F --> S[server]\n  F --> T[weight]",
+            "valid_syntax": true,
+            "response_time": 4.188185930252075
+        }
+    },
+    {
+        "sample_index": 2,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  ParentComponent[Parent Component<br>(useState Hook)] -->|Manages boolean flag (toggle)| ChildComponent[Child Component<br>(Consumes State)]\n  ParentComponent -->|Provides toggle value| TogglerComponent[Toggler Component<br>(useRef, useEffect)]\n  ChildComponent -->|Modifies state with callback| ParentComponent\n  TogglerComponent -->|Utilizes useEffect based<br>on toggle value| ReactsUseEffectHook[React's useEffect Hook]\n  ReactsUseEffectHook -->|Runs side-effect function| SideEffects[Side-Effect Function]\n  CustomHook[Custom Hook<br>(Optional)] -->|Reusable solution for<br>side-effects on update| ReactsUseEffectHook\n  ReactsUseEffectHook -->|Controlled by conditions<br>in Toggler Component| TogglerComponent\n  CustomHook -.->|Optionally used for<br>specific use cases| TogglerComponent\n  TogglerComponent -->|Accepts props for toggle<br>and onToggle| ChildComponent\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  ParentComponent[Parent Component<br>#40;useState Hook#41;] -->|Manages boolean flag #40;toggle#41;| ChildComponent[Child Component<br>#40;Consumes State#41;]\n  ParentComponent -->|Provides toggle value| TogglerComponent[Toggler Component<br>#40;useRef, useEffect#41;]\n  ChildComponent -->|Modifies state with callback| ParentComponent\n  TogglerComponent -->|Utilizes useEffect based<br>on toggle value| ReactsUseEffectHook[React&#39;s useEffect Hook]\n  ReactsUseEffectHook -->|Runs side-effect function| SideEffects[Side-Effect Function]\n  CustomHook[Custom Hook<br>#40;Optional#41;] -->|Reusable solution for<br>side-effects on update| ReactsUseEffectHook\n  ReactsUseEffectHook -->|Controlled by conditions<br>in Toggler Component| TogglerComponent\n  CustomHook -.->|Optionally used for<br>specific use cases| TogglerComponent\n  TogglerComponent -->|Accepts props for toggle<br>and onToggle| ChildComponent",
+            "valid_syntax": true,
+            "response_time": 3.2073261737823486
+        }
+    },
+    {
+        "sample_index": 3,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Start] --> B[Define Function add_numbers]\n    B --> C[Function takes two parameters a and b]\n    C --> D[Return the sum of a and b]\n    D --> E[Call add_numbers with 5, 3]\n    E --> F[Print \"The sum is: 8\"]\n    F --> G[End]\n\n    style A fill:#333,stroke:#fff,stroke-width:2px\n    style B fill:#555,stroke:#fff,stroke-width:2px\n    style C fill:#777,stroke:#fff,stroke-width:2px\n    style D fill:#999,stroke:#fff,stroke-width:2px\n    style E fill:#bbb,stroke:#fff,stroke-width:2px\n    style F fill:#ddd,stroke:#fff,stroke-width:2px\n    style G fill:#fff,stroke:#333,stroke-width:2px\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Start] --> B[Define Function add_numbers]\n    B --> C[Function takes two parameters a and b]\n    C --> D[Return the sum of a and b]\n    D --> E[Call add_numbers with 5, 3]\n    E --> F[Print &#34;The sum is: 8&#34;]\n    F --> G[End]\n\n    style A fill:#333,stroke:#fff,stroke-width:2px\n    style B fill:#555,stroke:#fff,stroke-width:2px\n    style C fill:#777,stroke:#fff,stroke-width:2px\n    style D fill:#999,stroke:#fff,stroke-width:2px\n    style E fill:#bbb,stroke:#fff,stroke-width:2px\n    style F fill:#ddd,stroke:#fff,stroke-width:2px\n    style G fill:#fff,stroke:#333,stroke-width:2px",
+            "valid_syntax": true,
+            "response_time": 4.639487981796265
+        }
+    },
+    {
+        "sample_index": 4,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nflowchart LR\n  subgraph main [\"\"]\n    direction LR\n    InputPoint --> Machinery1[Machinery/Workstation 1] -.-> StorageArea1((Storage 1))\n    Machinery1 -.-> Machinery2[Machinery/Workstation 2] -.-> StorageArea2((Storage 2))\n    Machinery2 -.-> Machinery3[Machinery/Workstation 3] -.-> StorageArea3((Storage 3))\n    Machinery3 --> OutputPoint\n  end\n  \n  InputPoint -.-> AS1((Auxiliary Service 1))\n  AS1 -.-> Machinery1\n  Machinery1 -.-> AS2((Auxiliary Service 2))\n  Machinery2 -.-> AS3((Auxiliary Service 3))\n  Machinery3 -.-> AS4((Auxiliary Service 4))\n  AS4 -.-> OutputPoint\n  \n  classDef mainline stroke-width:4px;\n  classDef machinery fill:#f9f,stroke:#333,stroke-width:2px;\n  classDef storage stroke-dasharray: 5, 5, fill:#bbf,stroke:#333;\n  classDef auxservice fill:#bfb,stroke:#333,stroke-width:1px;\n  classDef pathway stroke-dasharray: 2,2;\n  \n  class main mainline;\n  class Machinery1,Machinery2,Machinery3 machinery;\n  class StorageArea1,StorageArea2,StorageArea3 storage;\n  class AS1,AS2,AS3,AS4 auxservice;\n  linkStyle 0,2,4,6,7,9 pathway;\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "flowchart LR\n  subgraph main [&#34;&#34;]\n    direction LR\n    InputPoint --> Machinery1[Machinery/Workstation 1] -.-> StorageArea1(#40;Storage 1#41;)\n    Machinery1 -.-> Machinery2[Machinery/Workstation 2] -.-> StorageArea2(#40;Storage 2#41;)\n    Machinery2 -.-> Machinery3[Machinery/Workstation 3] -.-> StorageArea3(#40;Storage 3#41;)\n    Machinery3 --> OutputPoint\n  end\n  \n  InputPoint -.-> AS1(#40;Auxiliary Service 1#41;)\n  AS1 -.-> Machinery1\n  Machinery1 -.-> AS2(#40;Auxiliary Service 2#41;)\n  Machinery2 -.-> AS3(#40;Auxiliary Service 3#41;)\n  Machinery3 -.-> AS4(#40;Auxiliary Service 4#41;)\n  AS4 -.-> OutputPoint\n  \n  classDef mainline stroke-width:4px;\n  classDef machinery fill:#f9f,stroke:#333,stroke-width:2px;\n  classDef storage stroke-dasharray: 5, 5, fill:#bbf,stroke:#333;\n  classDef auxservice fill:#bfb,stroke:#333,stroke-width:1px;\n  classDef pathway stroke-dasharray: 2,2;\n  \n  class main mainline;\n  class Machinery1,Machinery2,Machinery3 machinery;\n  class StorageArea1,StorageArea2,StorageArea3 storage;\n  class AS1,AS2,AS3,AS4 auxservice;\n  linkStyle 0,2,4,6,7,9 pathway;",
+            "valid_syntax": true,
+            "response_time": 6.423832893371582
+        }
+    },
+    {
+        "sample_index": 5,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  BS[Background Script (background.js)] --> CWRA[Chrome WebRequest API]\n  CWRA --> |\"Uses\"| BS\n  MF[Manifest File (manifest.json)] --> |\"Declares permissions for\"| CWRA\n  BS --> |\"Logs POST requests\"| CWRA\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  BS[Background Script #40;background.js#41;] --> CWRA[Chrome WebRequest API]\n  CWRA --> |&#34;Uses&#34;| BS\n  MF[Manifest File #40;manifest.json#41;] --> |&#34;Declares permissions for&#34;| CWRA\n  BS --> |&#34;Logs POST requests&#34;| CWRA",
+            "valid_syntax": true,
+            "response_time": 2.847338914871216
+        }
+    },
+    {
+        "sample_index": 6,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  JA[Java Application] -->|calls via JDBC| PLSQL[PL/SQL Function]\n  JA -->|method: findStreetByIntersections| PLSQL\n  PLSQL -->|returns: String[]| JA\n  JA[Java Application] -->|input: street name| PLSQL\n  PLSQL[PL/SQL Function] -->|processes street name| DB[Oracle Database]\n  DB -->|retrieves intersections| PLSQL\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  JA[Java Application] -->|calls via JDBC| PLSQL[PL/SQL Function]\n  JA -->|method: findStreetByIntersections| PLSQL\n  PLSQL -->|returns: String#91;#93;| JA\n  JA[Java Application] -->|input: street name| PLSQL\n  PLSQL[PL/SQL Function] -->|processes street name| DB[Oracle Database]\n  DB -->|retrieves intersections| PLSQL",
+            "valid_syntax": true,
+            "response_time": 2.782498598098755
+        }
+    },
+    {
+        "sample_index": 7,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  HS[Hexadecimal String<br>\"439d6f861366e4da1bf5db71a092737a2ac7d17c55d670336f42e7bb8269fb9b\"] --> TH[Transaction Hash]\n  HS --> WA[Wallet Address]\n  HS --> CS[Cryptographic Signature]\n  TH --> BC(Blockchain)\n  WA --> WC(Wallet)\n  CS --> SC(Security)\n\n  classDef component fill:#f9f,stroke:#333,stroke-width:2px;\n  classDef icon fill:#bbf,stroke:#333,stroke-width:2px;\n  classDef process fill:#dfd,stroke:#333,stroke-width:2px;\n\n  class HS component;\n  class TH,WA,CS icon;\n  class BC,WC,SC process;\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  HS[Hexadecimal String<br>&#34;439d6f861366e4da1bf5db71a092737a2ac7d17c55d670336f42e7bb8269fb9b&#34;] --> TH[Transaction Hash]\n  HS --> WA[Wallet Address]\n  HS --> CS[Cryptographic Signature]\n  TH --> BC(Blockchain)\n  WA --> WC(Wallet)\n  CS --> SC(Security)\n\n  classDef component fill:#f9f,stroke:#333,stroke-width:2px;\n  classDef icon fill:#bbf,stroke:#333,stroke-width:2px;\n  classDef process fill:#dfd,stroke:#333,stroke-width:2px;\n\n  class HS component;\n  class TH,WA,CS icon;\n  class BC,WC,SC process;",
+            "valid_syntax": true,
+            "response_time": 3.6432220935821533
+        }
+    },
+    {
+        "sample_index": 8,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  init[pygame.init()] --> display[pygame.display.set_mode((width, height))]\n  display --> caption[pygame.display.set_caption(\"Physics Game\")]\n  caption --> clock[pygame.time.Clock()]\n  clock --> font[pygame.font.Font(None, 30)]\n  \n  font --> space[pymunk.Space()]\n  space --> gravity[space.gravity = (0, -981)]\n  gravity --> draw_options[pymunk.pygame_util.DrawOptions(screen)]\n  \n  draw_options --> segment_body[pymunk.Body(KINEMATIC)]\n  segment_body --> segment_shape[pymunk.Segment(segment_body, (100, 300), (700, 300), 5)]\n  segment_shape --> segment_elasticity[segment_shape.elasticity = 1]\n  segment_elasticity --> add_segment[space.add(segment_body, segment_shape)]\n  \n  add_segment --> ball_body[pymunk.Body(ball_mass, pymunk.moment_for_circle(ball_mass, 0, ball_radius))]\n  ball_body --> ball_position[ball_body.position = 400, 300]\n  ball_position --> ball_shape[pymunk.Circle(ball_body, ball_radius)]\n  ball_shape --> ball_elasticity[ball_shape.elasticity = 0.95]\n  ball_elasticity --> add_ball[space.add(ball_body, ball_shape)]\n  \n  add_ball --> joint[pymunk.PinJoint(segment_body, ball_body, (400, 300), (0, 0))]\n  joint --> add_joint[space.add(joint)]\n  \n  add_joint --> main[main loop]\n  main --> events[pygame.event.get()]\n  events --> quit[if event.type == pygame.QUIT]\n  events --> keydown[if event.type == pygame.KEYDOWN]\n  \n  keydown --> increase_mass[if event.key == pygame.K_w]\n  keydown --> decrease_mass[if event.key == pygame.K_s and ball_mass > 1]\n  keydown --> increase_elasticity[if event.key == pygame.K_a]\n  keydown --> decrease_elasticity[if event.key == pygame.K_d and segment_shape.elasticity > 0.1]\n  \n  increase_mass --> update_mass[ball_body.mass = ball_mass]\n  decrease_mass --> update_mass\n  increase_elasticity --> update_elasticity[segment_shape.elasticity += 0.1]\n  decrease_elasticity --> update_elasticity\n  \n  main --> fill_screen[screen.fill((255, 255, 255))]\n  fill_screen --> debug_draw[space.debug_draw(draw_options)]\n  debug_draw --> display_mass_and_elasticity[Display mass and elasticity on screen]\n  display_mass_and_elasticity --> flip[pygame.display.flip()]\n  flip --> step[space.step(1/50.0)]\n  step --> tick[clock.tick(50)]\n  \n  tick --> main\n  quit --> pygame_quit[pygame.quit()]\n  pygame_quit --> sys_exit[sys.exit()]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  init[pygame.init#40;#41;] --> display[pygame.display.set_mode#40;#40;width, height#41;#41;]\n  display --> caption[pygame.display.set_caption#40;&#34;Physics Game&#34;#41;]\n  caption --> clock[pygame.time.Clock#40;#41;]\n  clock --> font[pygame.font.Font#40;None, 30#41;]\n  \n  font --> space[pymunk.Space#40;#41;]\n  space --> gravity[space.gravity = #40;0, -981#41;]\n  gravity --> draw_options[pymunk.pygame_util.DrawOptions#40;screen#41;]\n  \n  draw_options --> segment_body[pymunk.Body#40;KINEMATIC#41;]\n  segment_body --> segment_shape[pymunk.Segment#40;segment_body, #40;100, 300#41;, #40;700, 300#41;, 5#41;]\n  segment_shape --> segment_elasticity[segment_shape.elasticity = 1]\n  segment_elasticity --> add_segment[space.add#40;segment_body, segment_shape#41;]\n  \n  add_segment --> ball_body[pymunk.Body#40;ball_mass, pymunk.moment_for_circle#40;ball_mass, 0, ball_radius#41;#41;]\n  ball_body --> ball_position[ball_body.position = 400, 300]\n  ball_position --> ball_shape[pymunk.Circle#40;ball_body, ball_radius#41;]\n  ball_shape --> ball_elasticity[ball_shape.elasticity = 0.95]\n  ball_elasticity --> add_ball[space.add#40;ball_body, ball_shape#41;]\n  \n  add_ball --> joint[pymunk.PinJoint#40;segment_body, ball_body, #40;400, 300#41;, #40;0, 0#41;#41;]\n  joint --> add_joint[space.add#40;joint#41;]\n  \n  add_joint --> main[main loop]\n  main --> events[pygame.event.get#40;#41;]\n  events --> quit[if event.type == pygame.QUIT]\n  events --> keydown[if event.type == pygame.KEYDOWN]\n  \n  keydown --> increase_mass[if event.key == pygame.K_w]\n  keydown --> decrease_mass[if event.key == pygame.K_s and ball_mass > 1]\n  keydown --> increase_elasticity[if event.key == pygame.K_a]\n  keydown --> decrease_elasticity[if event.key == pygame.K_d and segment_shape.elasticity > 0.1]\n  \n  increase_mass --> update_mass[ball_body.mass = ball_mass]\n  decrease_mass --> update_mass\n  increase_elasticity --> update_elasticity[segment_shape.elasticity += 0.1]\n  decrease_elasticity --> update_elasticity\n  \n  main --> fill_screen[screen.fill#40;#40;255, 255, 255#41;#41;]\n  fill_screen --> debug_draw[space.debug_draw#40;draw_options#41;]\n  debug_draw --> display_mass_and_elasticity[Display mass and elasticity on screen]\n  display_mass_and_elasticity --> flip[pygame.display.flip#40;#41;]\n  flip --> step[space.step#40;1/50.0#41;]\n  step --> tick[clock.tick#40;50#41;]\n  \n  tick --> main\n  quit --> pygame_quit[pygame.quit#40;#41;]\n  pygame_quit --> sys_exit[sys.exit#40;#41;]",
+            "valid_syntax": true,
+            "response_time": 8.856417179107666
+        }
+    },
+    {
+        "sample_index": 9,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Start] --> B[Invoke Math.random()]\n  B --> C{Is it for an integer?}\n  C -->|Yes| D[Use Math.floor(Math.random() * (max - min + 1)) + min]\n  C -->|No| E[Directly use Math.random()]\n  D --> F[Return integer value]\n  E --> G[Return floating point value]\n  F --> H[End]\n  G --> H\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Start] --> B[Invoke Math.random#40;#41;]\n  B --> C{Is it for an integer?}\n  C -->|Yes| D[Use Math.floor#40;Math.random#40;#41; * #40;max - min + 1#41;#41; + min]\n  C -->|No| E[Directly use Math.random#40;#41;]\n  D --> F[Return integer value]\n  E --> G[Return floating point value]\n  F --> H[End]\n  G --> H",
+            "valid_syntax": true,
+            "response_time": 1.7395777702331543
+        }
+    },
+    {
+        "sample_index": 10,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  Start([Start]) --> InputList[Input Password List ['p', 'a', 's', 's', 'w', 'o', 'r', 'd']]\n  InputList --> ShuffleOp{random.shuffle(password)}\n  ShuffleOp --> ShuffledList[Shuffled Password List ['s', 'w', 'p', 'o', 'r', 'd', 'a', 's']]\n  ShuffledList --> JoinOp{''.join(password)}\n  JoinOp --> OutputString[Output Shuffled Password String \"swpordas\"]\n  OutputString --> End([End])\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  Start(#91;Start#93;) --> InputList[Input Password List &#91;&#39;p&#39;, &#39;a&#39;, &#39;s&#39;, &#39;s&#39;, &#39;w&#39;, &#39;o&#39;, &#39;r&#39;, &#39;d&#39;#93;]\n  InputList --> ShuffleOp{random.shuffle#40;password#41;}\n  ShuffleOp --> ShuffledList[Shuffled Password List &#91;&#39;s&#39;, &#39;w&#39;, &#39;p&#39;, &#39;o&#39;, &#39;r&#39;, &#39;d&#39;, &#39;a&#39;, &#39;s&#39;#93;]\n  ShuffledList --> JoinOp{&#39;&#39;.join#40;password#41;}\n  JoinOp --> OutputString[Output Shuffled Password String &#34;swpordas&#34;]\n  OutputString --> End(#91;End#93;)",
+            "valid_syntax": true,
+            "response_time": 3.0418238639831543
+        }
+    },
+    {
+        "sample_index": 11,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngantt\n  title Hometown Arts Evolution Over 10 Years\n  dateFormat  YYYY-MM-DD\n  section Infrastructure\n    Road Not Paved :done, 2013-01-01, 2013-12-31\n    Road Paved With Cement :active, 2023-01-01, 2023-12-31\n  section Artistic Landscape\n    No Works of Art :done, 2013-01-01, 2013-12-31\n    Introduction of Various Works of Art :active, 2023-01-01, 2023-12-31\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "gantt\n  title Hometown Arts Evolution Over 10 Years\n  dateFormat  YYYY-MM-DD\n  section Infrastructure\n    Road Not Paved :done, 2013-01-01, 2013-12-31\n    Road Paved With Cement :active, 2023-01-01, 2023-12-31\n  section Artistic Landscape\n    No Works of Art :done, 2013-01-01, 2013-12-31\n    Introduction of Various Works of Art :active, 2023-01-01, 2023-12-31",
+            "valid_syntax": true,
+            "response_time": 5.751962900161743
+        }
+    },
+    {
+        "sample_index": 12,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nflowchart TD\n  A[Start] --> B{Input values}\n  B --> C[N (number of strips already placed)]\n  B --> D[L (width of the wall)]\n  B --> E[W (width of the wallpaper roll)]\n  B --> F[Array of xi (coordinates of left ends of placed strips)]\n\n  G[Variables used in the solution] --> H[count (to keep track of the number of wallpaper strips needed)]\n  G --> I[prev (to keep track of the previous coordinate)]\n\n  J[Calculation steps] --> K[Calculation of gap between coordinates]\n  K --> L[Calculation of strips needed to cover the gap]\n  L --> M[Updating count and prev]\n  \n  M --> N[End]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "flowchart TD\n  A[Start] --> B{Input values}\n  B --> C[N #40;number of strips already placed#41;]\n  B --> D[L #40;width of the wall#41;]\n  B --> E[W #40;width of the wallpaper roll#41;]\n  B --> F[Array of xi #40;coordinates of left ends of placed strips#41;]\n\n  G[Variables used in the solution] --> H[count #40;to keep track of the number of wallpaper strips needed#41;]\n  G --> I[prev #40;to keep track of the previous coordinate#41;]\n\n  J[Calculation steps] --> K[Calculation of gap between coordinates]\n  K --> L[Calculation of strips needed to cover the gap]\n  L --> M[Updating count and prev]\n  \n  M --> N[End]",
+            "valid_syntax": true,
+            "response_time": 2.8830981254577637
+        }
+    },
+    {
+        "sample_index": 13,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  UI[User Interface (UI)]\n  openAcc[openAcc]\n  depoAmo[depoAmo]\n  witham[witham]\n  balance[balance]\n  dispacc[dispacc]\n  closeac[closeac]\n  DB[MySQL Database]\n  DBCon[Database Connection]\n\n  UI -->|open new account| openAcc\n  UI -->|deposit amount| depoAmo\n  UI -->|withdraw amount| witham\n  UI -->|check balance| balance\n  UI -->|display customer details| dispacc\n  UI -->|close account| closeac\n\n  openAcc -->|interacts with| DBCon\n  depoAmo -->|interacts with| DBCon\n  witham -->|interacts with| DBCon\n  balance -->|interacts with| DBCon\n  dispacc -->|interacts with| DBCon\n  closeac -->|interacts with| DBCon\n\n  DBCon -->|connection| DB\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  UI[User Interface #40;UI#41;]\n  openAcc[openAcc]\n  depoAmo[depoAmo]\n  witham[witham]\n  balance[balance]\n  dispacc[dispacc]\n  closeac[closeac]\n  DB[MySQL Database]\n  DBCon[Database Connection]\n\n  UI -->|open new account| openAcc\n  UI -->|deposit amount| depoAmo\n  UI -->|withdraw amount| witham\n  UI -->|check balance| balance\n  UI -->|display customer details| dispacc\n  UI -->|close account| closeac\n\n  openAcc -->|interacts with| DBCon\n  depoAmo -->|interacts with| DBCon\n  witham -->|interacts with| DBCon\n  balance -->|interacts with| DBCon\n  dispacc -->|interacts with| DBCon\n  closeac -->|interacts with| DBCon\n\n  DBCon -->|connection| DB",
+            "valid_syntax": true,
+            "response_time": 3.5692968368530273
+        }
+    },
+    {
+        "sample_index": 14,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Start] --> B[Combine Data Filtering and Frequency Analysis]\n    B --> C[PROC FREQ with WHERE condition]\n    C --> D[TABLES gender]\n    D --> E[TITLE 'Frequency of Gender in the Dataset (Age > 18)']\n    E --> F[End]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Start] --> B[Combine Data Filtering and Frequency Analysis]\n    B --> C[PROC FREQ with WHERE condition]\n    C --> D[TABLES gender]\n    D --> E[TITLE &#39;Frequency of Gender in the Dataset #40;Age > 18#41;&#39;]\n    E --> F[End]",
+            "valid_syntax": true,
+            "response_time": 1.0038669109344482
+        }
+    },
+    {
+        "sample_index": 15,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "\\`\\`\\`mermaid\ngraph TD\n  A[User Input] -->|Number entered by user| B(Main Function)\n  B -->|Calls with input number| C(mynum Function)\n  C -->|0 or 1| D[Return false]\n  C -->|Divisible by 2| E[Return false]\n  C -->|Number is prime| F[Return true]\n  B -->|Checks return value| G{Is number prime?}\n  G -->|True| H[Output \"The number is prime.\"]\n  G -->|False| I[Output \"The number is not prime.\"]\n\\`\\`\\`",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[User Input] -->|Number entered by user| B(Main Function)\n  B -->|Calls with input number| C(mynum Function)\n  C -->|0 or 1| D[Return false]\n  C -->|Divisible by 2| E[Return false]\n  C -->|Number is prime| F[Return true]\n  B -->|Checks return value| G{Is number prime?}\n  G -->|True| H[Output &#34;The number is prime.&#34;]\n  G -->|False| I[Output &#34;The number is not prime.&#34;]",
+            "valid_syntax": true,
+            "response_time": 2.261875867843628
+        }
+    },
+    {
+        "sample_index": 16,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nflowchart TB\n  NodeJSInstallation[Node.js Installation] --> CreateNewFile[Create a New File]\n  CreateNewFile --> CodeWriting[Code Writing]\n  CodeWriting --> RunTheProgram[Run the Program]\n  RunTheProgram --> Output[Output: \"Hello, World!\"]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "flowchart TB\n  NodeJSInstallation[Node.js Installation] --> CreateNewFile[Create a New File]\n  CreateNewFile --> CodeWriting[Code Writing]\n  CodeWriting --> RunTheProgram[Run the Program]\n  RunTheProgram --> Output[Output: &#34;Hello, World!&#34;]",
+            "valid_syntax": true,
+            "response_time": 1.5257997512817383
+        }
+    },
+    {
+        "sample_index": 17,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Mobile Responsive CSS] --> B[Media Query (max-width: 600px)]\n  C[Restrict Access for Windows and Tablets] --> D[Styles to Restrict Access]\n  A --> C\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Mobile Responsive CSS] --> B[Media Query #40;max-width: 600px#41;]\n  C[Restrict Access for Windows and Tablets] --> D[Styles to Restrict Access]\n  A --> C",
+            "valid_syntax": true,
+            "response_time": 1.3503658771514893
+        }
+    },
+    {
+        "sample_index": 18,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Start] --> B[Handle Job Model Hide]\n  B --> C[Update Target Selection]\n  C --> D[Create OTA Update]\n  D --> E[Form Input Validation]\n  E -->|Valid| F[Enable \"Create OTA\" Button]\n  E -->|Invalid| G[Disable \"Create OTA\" Button and Show Error]\n  F --> H[Switch Device Type]\n  G --> H\n  H --> I[End]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Start] --> B[Handle Job Model Hide]\n  B --> C[Update Target Selection]\n  C --> D[Create OTA Update]\n  D --> E[Form Input Validation]\n  E -->|Valid| F[Enable &#34;Create OTA&#34; Button]\n  E -->|Invalid| G[Disable &#34;Create OTA&#34; Button and Show Error]\n  F --> H[Switch Device Type]\n  G --> H\n  H --> I[End]",
+            "valid_syntax": true,
+            "response_time": 2.0183238983154297
+        }
+    },
+    {
+        "sample_index": 19,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  Browser --> Document\n  Document --> HTML[html]\n  HTML --> HEAD[head]\n  HEAD --> META_CHARSET[meta charset=\"UTF-8\"]\n  HEAD --> META_KEYWORDS[meta name=\"keywords\"]\n  HEAD --> META_DESCRIPTION[meta name=\"description\"]\n  HEAD --> TITLE[title]\n  HTML --> BODY[body]\n  BODY --> IMG[img src=\"path/to/icon.jpg\" alt=\"Icon\"]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  Browser --> Document\n  Document --> HTML[html]\n  HTML --> HEAD[head]\n  HEAD --> META_CHARSET[meta charset=&#34;UTF-8&#34;]\n  HEAD --> META_KEYWORDS[meta name=&#34;keywords&#34;]\n  HEAD --> META_DESCRIPTION[meta name=&#34;description&#34;]\n  HEAD --> TITLE[title]\n  HTML --> BODY[body]\n  BODY --> IMG[img src=&#34;path/to/icon.jpg&#34; alt=&#34;Icon&#34;]",
+            "valid_syntax": true,
+            "response_time": 2.6257200241088867
+        }
+    },
+    {
+        "sample_index": 20,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  ImageFiles[(\"Image Files\")] --> AddMethodArrow[Add Method]\n  AddMethodArrow --> ImageListControlBox[(\"ImageList Control Box\")]\n  ImagePathRepresentation[\"Image Path Representation\\n'C:\\\\\\\\MyDocuments\\\\\\\\image.png'\"] --> AddMethodArrow\n  KeyValueOption[(\"Key Value Option\")] -.-> AddMethodArrow\n  \n  subgraph ProgrammingEnvironmentOrCodeEditor[(\"Programming Environment or Code Editor\")]\n    ImageListControlBox\n    ImagePathRepresentation\n    KeyValueOption\n  end\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  ImageFiles[(&#34;Image Files&#34;)] --> AddMethodArrow[Add Method]\n  AddMethodArrow --> ImageListControlBox[(&#34;ImageList Control Box&#34;)]\n  ImagePathRepresentation[&#34;Image Path Representation\\n&#39;C:\\\\\\\\MyDocuments\\\\\\\\image.png&#39;&#34;] --> AddMethodArrow\n  KeyValueOption[(&#34;Key Value Option&#34;)] -.-> AddMethodArrow\n  \n  subgraph ProgrammingEnvironmentOrCodeEditor[(&#34;Programming Environment or Code Editor&#34;)]\n    ImageListControlBox\n    ImagePathRepresentation\n    KeyValueOption\n  end",
+            "valid_syntax": false,
+            "response_time": 2.8253908157348633
+        }
+    },
+    {
+        "sample_index": 21,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph LR\n  A[Person A] -->|\u041f\u0440\u0438\u0432\u0435\u0442 (Hello)| B[Person B]\n  B -->|\u041f\u0440\u0438\u0432\u0435\u0442 (Hello)| A\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph LR\n  A[Person A] -->|\u041f\u0440\u0438\u0432\u0435\u0442 #40;Hello#41;| B[Person B]\n  B -->|\u041f\u0440\u0438\u0432\u0435\u0442 #40;Hello#41;| A",
+            "valid_syntax": true,
+            "response_time": 0.820930004119873
+        }
+    },
+    {
+        "sample_index": 22,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nsequenceDiagram\n  participant User as User\n  participant URL as URL\n  participant JS as JavaScript Code\n  participant Page as proshli.html Page\n\n  User->>URL: Enters URL with parameters\n  URL->>JS: Passes parameters\n  JS->>JS: Parse URL Parameters\n  JS->>Page: Display username\n  JS->>Page: Display password\n  JS->>Page: Display email\n  JS->>Page: Display option\n  JS->>Page: Display enrollmentYear\n  JS->>Page: Display studyDirection\n  JS->>Page: Display feedback\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "sequenceDiagram\n  participant User as User\n  participant URL as URL\n  participant JS as JavaScript Code\n  participant Page as proshli.html Page\n\n  User->>URL: Enters URL with parameters\n  URL->>JS: Passes parameters\n  JS->>JS: Parse URL Parameters\n  JS->>Page: Display username\n  JS->>Page: Display password\n  JS->>Page: Display email\n  JS->>Page: Display option\n  JS->>Page: Display enrollmentYear\n  JS->>Page: Display studyDirection\n  JS->>Page: Display feedback",
+            "valid_syntax": true,
+            "response_time": 2.0043342113494873
+        }
+    },
+    {
+        "sample_index": 23,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  SR[Shared Resource] -->|accessed by| CS[Critical Section]\n  M[Mutex] --> LS[Lock State]\n  M -->|controls access to| SR\n  T1[Thread 1] -->|attempts to access| M\n  T2[Thread 2] -->|attempts to access| M\n  T3[Thread 3] -->|attempts to access| M\n  M -->|lock() before entering| CS\n  CS -->|unlock() after exiting| M\n  LS -->|indicates| L[Locked]\n  LS -->|indicates| UL[Unlocked]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  SR[Shared Resource] -->|accessed by| CS[Critical Section]\n  M[Mutex] --> LS[Lock State]\n  M -->|controls access to| SR\n  T1[Thread 1] -->|attempts to access| M\n  T2[Thread 2] -->|attempts to access| M\n  T3[Thread 3] -->|attempts to access| M\n  M -->|lock#40;#41; before entering| CS\n  CS -->|unlock#40;#41; after exiting| M\n  LS -->|indicates| L[Locked]\n  LS -->|indicates| UL[Unlocked]",
+            "valid_syntax": true,
+            "response_time": 2.322935104370117
+        }
+    },
+    {
+        "sample_index": 24,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "\\`\\`\\`mermaid\ngraph TD\n  A[Main Function] --> B[bubbleSort Function]\n  A --> C[Input/Output Operations]\n  A --> D[Array arr[]]\n  A --> E[Count Variable]\n  A --> F[LargestSides Array]\n  A --> G[Index Variable]\n  A --> H[Loop 1]\n  A --> I[Loop 2]\n  A --> J[Loop 3]\n  H -->|Check if can form triangle| E\n  I -->|Populate with largest sides| F\n  J -->|Display in descending order| C\n\\`\\`\\`",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Main Function] --> B[bubbleSort Function]\n  A --> C[Input/Output Operations]\n  A --> D[Array arr#91;#93;]\n  A --> E[Count Variable]\n  A --> F[LargestSides Array]\n  A --> G[Index Variable]\n  A --> H[Loop 1]\n  A --> I[Loop 2]\n  A --> J[Loop 3]\n  H -->|Check if can form triangle| E\n  I -->|Populate with largest sides| F\n  J -->|Display in descending order| C",
+            "valid_syntax": true,
+            "response_time": 1.9698050022125244
+        }
+    },
+    {
+        "sample_index": 25,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Application] --> B[start function]\n  A --> C[ask_question callback function]\n  A --> D[generate_image callback function]\n  A --> E[new_chat callback function]\n\n  B --> F[InlineKeyboardMarkup]\n  F --> G[InlineKeyboardButton \"\u0417\u0430\u0434\u0430\u0442\u044c \u0432\u043e\u043f\u0440\u043e\u0441\"]\n  F --> H[InlineKeyboardButton \"\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435\"]\n  F --> I[InlineKeyboardButton \"\u041d\u043e\u0432\u044b\u0439 \u0447\u0430\u0442\"]\n\n  G --> J[\"ask_question\" callback data]\n  H --> K[\"generate_image\" callback data]\n  I --> L[\"new_chat\" callback data]\n\n  C -.-> J\n  D -.-> K\n  E -.-> L\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Application] --> B[start function]\n  A --> C[ask_question callback function]\n  A --> D[generate_image callback function]\n  A --> E[new_chat callback function]\n\n  B --> F[InlineKeyboardMarkup]\n  F --> G[InlineKeyboardButton &#34;\u0417\u0430\u0434\u0430\u0442\u044c \u0432\u043e\u043f\u0440\u043e\u0441&#34;]\n  F --> H[InlineKeyboardButton &#34;\u0421\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435&#34;]\n  F --> I[InlineKeyboardButton &#34;\u041d\u043e\u0432\u044b\u0439 \u0447\u0430\u0442&#34;]\n\n  G --> J[&#34;ask_question&#34; callback data]\n  H --> K[&#34;generate_image&#34; callback data]\n  I --> L[&#34;new_chat&#34; callback data]\n\n  C -.-> J\n  D -.-> K\n  E -.-> L",
+            "valid_syntax": true,
+            "response_time": 2.414968729019165
+        }
+    },
+    {
+        "sample_index": 26,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  Minecraft --> DOT[Damage Over Time (DOT) Effect]\n  DOT --> BHT[\"Better Hurt Timer Mod\"]\n  DOT --> DO[\"Damage Overhaul Mod\"]\n  DOT --> ESS[\"EssentialsX Plugin\"]\n  DOT --> MS[\"Magic Spells Mod\"]\n  DOT --> CP[\"Custom Plugins\"]\n  CP --> Bukkit[\"Bukkit\"]\n  CP --> Sponge[\"Sponge\"]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  Minecraft --> DOT[Damage Over Time #40;DOT#41; Effect]\n  DOT --> BHT[&#34;Better Hurt Timer Mod&#34;]\n  DOT --> DO[&#34;Damage Overhaul Mod&#34;]\n  DOT --> ESS[&#34;EssentialsX Plugin&#34;]\n  DOT --> MS[&#34;Magic Spells Mod&#34;]\n  DOT --> CP[&#34;Custom Plugins&#34;]\n  CP --> Bukkit[&#34;Bukkit&#34;]\n  CP --> Sponge[&#34;Sponge&#34;]",
+            "valid_syntax": true,
+            "response_time": 2.383820056915283
+        }
+    },
+    {
+        "sample_index": 27,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "\\`\\`\\`mermaid\ngraph TD\n  A[Early Life] -->|Birth in \u65e5\u91ce\u57ce| B[Upbringing as the son of \u84b2\u751f\u8ce2\u79c0]\n  A --> C[Involvement in Battles]\n  C --> D[\u89b3\u97f3\u5bfa\u57ce\u306e\u6226\u3044]\n  C --> E[\u4f0a\u52e2\u9577\u5cf6\u653b\u3081]\n  C --> F[\u9577\u7be0\u306e\u6226\u3044]\n  A --> G[Relationship with \u7e54\u7530\u4fe1\u9577]\n  G --> H[Marriage to \u7e54\u7530\u4fe1\u9577's daughter]\n  A --> I[Transition to Christianity]\n  I --> J[Baptism and adoption of the name \u30ec\u30aa\u30f3]\n  A --> K[Transfer to \u4f1a\u6d25]\n  K --> L[Significant increase in land holdings]\n  A --> M[Management of Territories]\n  M --> N[Governance at \u677e\u5742\u57ce]\n  M --> O[Development of \u677e\u5742\u57ce\u306e\u57ce\u4e0b\u753a]\n  A --> P[Interaction with Subordinates]\n  P --> Q[Respectful treatment, baths, and meals]\n  A --> R[Legacy]\n  R --> S[Spread of \"\u8d77\u304d\u4e0a\u304c\u308a\u5c0f\u6cd5\u5e2b\" tradition]\n  R --> T[Granting of the \u84b2\u751f name to followers]\n\\`\\`\\`",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Early Life] -->|Birth in \u65e5\u91ce\u57ce| B[Upbringing as the son of \u84b2\u751f\u8ce2\u79c0]\n  A --> C[Involvement in Battles]\n  C --> D[\u89b3\u97f3\u5bfa\u57ce\u306e\u6226\u3044]\n  C --> E[\u4f0a\u52e2\u9577\u5cf6\u653b\u3081]\n  C --> F[\u9577\u7be0\u306e\u6226\u3044]\n  A --> G[Relationship with \u7e54\u7530\u4fe1\u9577]\n  G --> H[Marriage to \u7e54\u7530\u4fe1\u9577&#39;s daughter]\n  A --> I[Transition to Christianity]\n  I --> J[Baptism and adoption of the name \u30ec\u30aa\u30f3]\n  A --> K[Transfer to \u4f1a\u6d25]\n  K --> L[Significant increase in land holdings]\n  A --> M[Management of Territories]\n  M --> N[Governance at \u677e\u5742\u57ce]\n  M --> O[Development of \u677e\u5742\u57ce\u306e\u57ce\u4e0b\u753a]\n  A --> P[Interaction with Subordinates]\n  P --> Q[Respectful treatment, baths, and meals]\n  A --> R[Legacy]\n  R --> S[Spread of &#34;\u8d77\u304d\u4e0a\u304c\u308a\u5c0f\u6cd5\u5e2b&#34; tradition]\n  R --> T[Granting of the \u84b2\u751f name to followers]",
+            "valid_syntax": true,
+            "response_time": 3.9635298252105713
+        }
+    },
+    {
+        "sample_index": 28,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  Mutex((Mutex))\n  Mutex -->|Locked| LockedState[Locked]\n  Mutex -->|Unlocked| UnlockedState[Unlocked]\n  \n  Thread1(Thread 1)\n  Thread2(Thread 2)\n  SharedResource[Shared Resource]\n  \n  Thread1 -->|lock()| Mutex\n  Mutex -->|locked| Thread1\n  Thread1 -->|Access| SharedResource\n  Thread1 -->|unlock()| Mutex\n  \n  Thread2 -->|lock()| Mutex\n  Mutex -->|blocked| Thread2\n  Thread2 -->|lock()| Mutex\n  Mutex -->|locked| Thread2\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  Mutex(#40;Mutex#41;)\n  Mutex -->|Locked| LockedState[Locked]\n  Mutex -->|Unlocked| UnlockedState[Unlocked]\n  \n  Thread1(Thread 1)\n  Thread2(Thread 2)\n  SharedResource[Shared Resource]\n  \n  Thread1 -->|lock#40;#41;| Mutex\n  Mutex -->|locked| Thread1\n  Thread1 -->|Access| SharedResource\n  Thread1 -->|unlock#40;#41;| Mutex\n  \n  Thread2 -->|lock#40;#41;| Mutex\n  Mutex -->|blocked| Thread2\n  Thread2 -->|lock#40;#41;| Mutex\n  Mutex -->|locked| Thread2",
+            "valid_syntax": true,
+            "response_time": 2.3964431285858154
+        }
+    },
+    {
+        "sample_index": 29,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[International Business Trade] --> B[Compliance and Regulations]\n    A --> C[Ethical Considerations]\n    A --> D[Corporate Social Responsibility (CSR)]\n    A --> E[Transparency and Accountability]\n    A --> F[Impact on Stakeholders]\n\n    B --> G[Adhering to diverse legal frameworks]\n    B --> H[Avoiding legal issues]\n\n    C --> I[Trust and Reputation]\n    C --> J[Long-term Sustainability]\n\n    D --> K[Promote ethical labor practices]\n    D --> L[Environmental sustainability]\n    D --> M[Community engagement]\n\n    E --> N[Building strong relationships]\n    E --> O[Commitment to integrity]\n\n    F --> P[Protecting interests of stakeholders]\n    F --> Q[Negative consequences for unethical behavior]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[International Business Trade] --> B[Compliance and Regulations]\n    A --> C[Ethical Considerations]\n    A --> D[Corporate Social Responsibility #40;CSR#41;]\n    A --> E[Transparency and Accountability]\n    A --> F[Impact on Stakeholders]\n\n    B --> G[Adhering to diverse legal frameworks]\n    B --> H[Avoiding legal issues]\n\n    C --> I[Trust and Reputation]\n    C --> J[Long-term Sustainability]\n\n    D --> K[Promote ethical labor practices]\n    D --> L[Environmental sustainability]\n    D --> M[Community engagement]\n\n    E --> N[Building strong relationships]\n    E --> O[Commitment to integrity]\n\n    F --> P[Protecting interests of stakeholders]\n    F --> Q[Negative consequences for unethical behavior]",
+            "valid_syntax": true,
+            "response_time": 5.926419258117676
+        }
+    },
+    {
+        "sample_index": 30,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Web Page Container] --> B(Header [H1 Tag]: Language Translator)\n  A --> C(Source Language Selector [Dropdown])\n  A --> D(Input Text Area)\n  A --> E(Translate Button)\n  A --> F(Target Language Selector [Dropdown])\n  A --> G(Output Text Area)\n\n  C --> C1[English]\n  C --> C2[French]\n  F --> F1[English]\n  F --> F2[French]\n\n  E --> |\"Triggers translation\"| G\n  E -.-> |\"Handled by script.js\"| script[External Script Connection]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Web Page Container] --> B(Header #91;H1 Tag#93;: Language Translator)\n  A --> C(Source Language Selector #91;Dropdown#93;)\n  A --> D(Input Text Area)\n  A --> E(Translate Button)\n  A --> F(Target Language Selector #91;Dropdown#93;)\n  A --> G(Output Text Area)\n\n  C --> C1[English]\n  C --> C2[French]\n  F --> F1[English]\n  F --> F2[French]\n\n  E --> |&#34;Triggers translation&#34;| G\n  E -.-> |&#34;Handled by script.js&#34;| script[External Script Connection]",
+            "valid_syntax": true,
+            "response_time": 2.195448875427246
+        }
+    },
+    {
+        "sample_index": 31,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Total Value Locked (TVL) in DeFi] -->|Affects| B[Liquidity]\n    A -->|Affects| C[Fees]\n    A -->|Affects| D[Slippage]\n    B --> E[Retail Traders Hurt]\n    C --> F[Liquidity Providers Need High Yield]\n    D --> G[Trade Volume Impact]\n    H[Income Share Agreements (ISAs)] -->|Alternative to| I[Student Loans]\n    H -->|Used by| J[Some For-Profit Colleges and Institutions like Purdue]\n    H -->|Potential Regulation| K[Capping Student Loans]\n    H -->|Controversy and Value| L[Core Idea Has Value]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Total Value Locked #40;TVL#41; in DeFi] -->|Affects| B[Liquidity]\n    A -->|Affects| C[Fees]\n    A -->|Affects| D[Slippage]\n    B --> E[Retail Traders Hurt]\n    C --> F[Liquidity Providers Need High Yield]\n    D --> G[Trade Volume Impact]\n    H[Income Share Agreements #40;ISAs#41;] -->|Alternative to| I[Student Loans]\n    H -->|Used by| J[Some For-Profit Colleges and Institutions like Purdue]\n    H -->|Potential Regulation| K[Capping Student Loans]\n    H -->|Controversy and Value| L[Core Idea Has Value]",
+            "valid_syntax": true,
+            "response_time": 3.0397017002105713
+        }
+    },
+    {
+        "sample_index": 32,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[LibreTranslate Trademark and Open-Source Guidelines] --> B(Trademark Usage Guidelines)\n  A --> C(Open Source Guidelines)\n  A --> D(Examples of Acceptable Usage)\n  A --> E(Prohibited Actions)\n  \n  B --> B1[Dos]\n  B --> B2[Donts]\n  \n  B1 --> B1a[Use unique branding, logos, and trademarks for your project]\n  B1 --> B1b[Clearly signal no affiliation with or endorsement by LibreTranslate]\n  \n  B2 --> B2a[Do not use any LibreTranslate trademark in user-facing name or branding]\n  B2 --> B2b[Do not incorrectly suggest affiliation, endorsement, or publication by LibreTranslate]\n  \n  C --> C1[Follow the terms of the Open Source License(s)]\n  C --> C2[Choose unique branding to avoid confusion with LibreTranslate]\n  \n  D --> D1[Naming: \"Fans of LibreTranslate\", \"Information about LibreTranslate Software\"]\n  D --> D2[Logo Usage: No usage of LibreTranslate logos without permission]\n  \n  E --> E1[Do not use LibreTranslate trademark in project names like \"[Something]-LibreTranslate\"]\n  E --> E2[Do not imply affiliation or endorsement with LibreTranslate in any way]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[LibreTranslate Trademark and Open-Source Guidelines] --> B(Trademark Usage Guidelines)\n  A --> C(Open Source Guidelines)\n  A --> D(Examples of Acceptable Usage)\n  A --> E(Prohibited Actions)\n  \n  B --> B1[Dos]\n  B --> B2[Donts]\n  \n  B1 --> B1a[Use unique branding, logos, and trademarks for your project]\n  B1 --> B1b[Clearly signal no affiliation with or endorsement by LibreTranslate]\n  \n  B2 --> B2a[Do not use any LibreTranslate trademark in user-facing name or branding]\n  B2 --> B2b[Do not incorrectly suggest affiliation, endorsement, or publication by LibreTranslate]\n  \n  C --> C1[Follow the terms of the Open Source License#40;s#41;]\n  C --> C2[Choose unique branding to avoid confusion with LibreTranslate]\n  \n  D --> D1[Naming: &#34;Fans of LibreTranslate&#34;, &#34;Information about LibreTranslate Software&#34;]\n  D --> D2[Logo Usage: No usage of LibreTranslate logos without permission]\n  \n  E --> E1[Do not use LibreTranslate trademark in project names like &#34;#91;Something#93;-LibreTranslate&#34;]\n  E --> E2[Do not imply affiliation or endorsement with LibreTranslate in any way]",
+            "valid_syntax": true,
+            "response_time": 3.7484869956970215
+        }
+    },
+    {
+        "sample_index": 33,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A([Code Snippet Box<br>---------------------<br>#include <iostream><br><br>int main() {<br>  std::cout << \"I love you\";<br>  return 0;<br>}]) -->|calls| B([std::cout line<br>----------------<br>std::cout << \"I love you\";])\n    B --> C([Console Output Box<br>------------------------<br>I love you])\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A(#91;Code Snippet Box<br>---------------------<br>#include <iostream><br><br>int main#40;#41; #123;<br>  std::cout &lt;&lt; &#34;I love you&#34;;<br>  return 0;<br>#125;#93;) -->|calls| B([std::cout line<br>----------------<br>std::cout &lt;&lt; &#34;I love you&#34;;])\n    B --> C(#91;Console Output Box<br>------------------------<br>I love you#93;)",
+            "valid_syntax": true,
+            "response_time": 1.8552980422973633
+        }
+    },
+    {
+        "sample_index": 34,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Struct Node] -->|data| B(int)\n  A -->|next| C(pointer to next node)\n\n  D(Global Variable head) --> E(pointer to head of the list)\n\n  F(Functions) --> G(lastinsert())\n  F --> H(lastdelete())\n  F --> I(display())\n  F --> J(main())\n\n  K(User Input and Output) --> L(Menu options and input prompts)\n\n  G --> E\n  H --> E\n  I --> E\n  J -->|controls flow based on| K\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Struct Node] -->|data| B(int)\n  A -->|next| C(pointer to next node)\n\n  D(Global Variable head) --> E(pointer to head of the list)\n\n  F(Functions) --> G(lastinsert#40;#41;)\n  F --> H(lastdelete#40;#41;)\n  F --> I(display#40;#41;)\n  F --> J(main#40;#41;)\n\n  K(User Input and Output) --> L(Menu options and input prompts)\n\n  G --> E\n  H --> E\n  I --> E\n  J -->|controls flow based on| K",
+            "valid_syntax": true,
+            "response_time": 1.994920015335083
+        }
+    },
+    {
+        "sample_index": 35,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[CSS \u0424\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435] --> B[background-color: beige;]\n    A --> C[background-color: rgb(245, 245, 220);]\n    A --> D[background-color: #f5f5dc;]\n\n    B --> E[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u043b\u044e\u0447\u0435\u0432\u043e\u0433\u043e \u0441\u043b\u043e\u0432\u0430]\n    C --> F[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 RGB \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f]\n    D --> G[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u0448\u0435\u0441\u0442\u043d\u0430\u0434\u0446\u0430\u0442\u0435\u0440\u0438\u0447\u043d\u043e\u0433\u043e \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[CSS \u0424\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435] --> B[background-color: beige;]\n    A --> C[background-color: rgb#40;245, 245, 220#41;]\n    A --> D[background-color: #f5f5dc;]\n\n    B --> E[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u043b\u044e\u0447\u0435\u0432\u043e\u0433\u043e \u0441\u043b\u043e\u0432\u0430]\n    C --> F[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 RGB \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f]\n    D --> G[\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u0448\u0435\u0441\u0442\u043d\u0430\u0434\u0446\u0430\u0442\u0435\u0440\u0438\u0447\u043d\u043e\u0433\u043e \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f]",
+            "valid_syntax": true,
+            "response_time": 2.2927610874176025
+        }
+    },
+    {
+        "sample_index": 36,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Start] --> B[Input n]\n    B --> C{For i in range(1, n)}\n    C -->|i divides n| D[Add i to factorsum]\n    D --> E[Print i]\n    E --> F{Is factorsum == n?}\n    F -->|Yes| G[Print \"n is a perfect number\"]\n    F -->|No| H[Print \"n is not a perfect number\"]\n    C -->|i does not divide n| I[Continue loop]\n    I --> C\n    G --> J[End]\n    H --> J\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Start] --> B[Input n]\n    B --> C{For i in range#40;1, n#41;}\n    C -->|i divides n| D[Add i to factorsum]\n    D --> E[Print i]\n    E --> F{Is factorsum == n?}\n    F -->|Yes| G[Print &#34;n is a perfect number&#34;]\n    F -->|No| H[Print &#34;n is not a perfect number&#34;]\n    C -->|i does not divide n| I[Continue loop]\n    I --> C\n    G --> J[End]\n    H --> J",
+            "valid_syntax": true,
+            "response_time": 1.924124002456665
+        }
+    },
+    {
+        "sample_index": 37,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nflowchart TD\n  A[Start] --> B[User inputs number of strings]\n  B --> C[User enters strings into list1]\n  C --> D[User inputs a single letter]\n  D --> E{Is letter length == 1?}\n  E -- Yes --> F[User inputs an index]\n  F --> G[Call function with list1, index, and letter]\n  G --> H[Iterate through list1]\n  H --> I{Check string length}\n  I -- Length == 0 --> J[Return \"Length of string is 0\"]\n  I -- Length < Index --> K[Return \"Index larger than length of string\"]\n  I -- Length >= Index --> L{Does letter at index match?}\n  L -- Yes --> M[Return \"String contains letter at index\"]\n  L -- No --> N[Continue iteration]\n  N --> H\n  E -- No --> O[Print \"Length of letter is not equal to 1\"]\n  J --> P[End]\n  K --> P\n  M --> P\n  O --> P\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "flowchart TD\n  A[Start] --> B[User inputs number of strings]\n  B --> C[User enters strings into list1]\n  C --> D[User inputs a single letter]\n  D --> E{Is letter length == 1?}\n  E -- Yes --> F[User inputs an index]\n  F --> G[Call function with list1, index, and letter]\n  G --> H[Iterate through list1]\n  H --> I{Check string length}\n  I -- Length == 0 --> J[Return &#34;Length of string is 0&#34;]\n  I -- Length < Index --> K[Return &#34;Index larger than length of string&#34;]\n  I -- Length >= Index --> L{Does letter at index match?}\n  L -- Yes --> M[Return &#34;String contains letter at index&#34;]\n  L -- No --> N[Continue iteration]\n  N --> H\n  E -- No --> O[Print &#34;Length of letter is not equal to 1&#34;]\n  J --> P[End]\n  K --> P\n  M --> P\n  O --> P",
+            "valid_syntax": true,
+            "response_time": 3.81435489654541
+        }
+    },
+    {
+        "sample_index": 38,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[HTML Structure] --> B[head]\n  A --> C[body]\n  C --> D[File Input Fields]\n  C --> E[Calculate Button]\n  C --> F[Result Display]\n  C --> G[JavaScript Functions]\n  D --> H[input id=\"file1\" type=\"file\"]\n  D --> I[input id=\"file2\" type=\"file\"]\n  E --> J[onclick event]\n  G --> K[calculateAverage()]\n  K --> L[File Readers]\n  K --> M[Average Calculation]\n  L --> N[FileReader 1]\n  L --> O[FileReader 2]\n  N --> P[onload event]\n  O --> Q[onload event]\n  M --> R[Display Results in \"result\" div]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[HTML Structure] --> B[head]\n  A --> C[body]\n  C --> D[File Input Fields]\n  C --> E[Calculate Button]\n  C --> F[Result Display]\n  C --> G[JavaScript Functions]\n  D --> H[input id=&#34;file1&#34; type=&#34;file&#34;]\n  D --> I[input id=&#34;file2&#34; type=&#34;file&#34;]\n  E --> J[onclick event]\n  G --> K[calculateAverage#40;#41;]\n  K --> L[File Readers]\n  K --> M[Average Calculation]\n  L --> N[FileReader 1]\n  L --> O[FileReader 2]\n  N --> P[onload event]\n  O --> Q[onload event]\n  M --> R[Display Results in &#34;result&#34; div]",
+            "valid_syntax": true,
+            "response_time": 3.792739152908325
+        }
+    },
+    {
+        "sample_index": 39,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A[Historical Context] -->|1| B[Spain's colonization of the Philippines (1565-1898)]\n  A -->|2| C[The weakening of the Catholic Church in Europe]\n  A -->|3| D[The Philippine Revolution (1896-1898) and American rule]\n\n  E[Strategic Adaptations] -->|4| F[Localization of Clergy and Church Leadership]\n  B --> F\n  E -->|5| G[Engagement with Social Issues]\n  D --> G\n  E -->|6| H[Political Involvement]\n  D --> H\n\n  I[Enduring Influence] -->|7| J[Deep-rooted Catholic Identity]\n  G --> J\n  H --> J\n  I -->|8| K[Continued Authority and Respect]\n  B --> K\n  C --> K\n  D --> K\n  F --> K\n  G --> K\n  H --> K\n  I -->|9| L[Adaptation to Modern Challenges]\n  K --> L\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A[Historical Context] -->|1| B[Spain&#39;s colonization of the Philippines #40;1565-1898#41;]\n  A -->|2| C[The weakening of the Catholic Church in Europe]\n  A -->|3| D[The Philippine Revolution #40;1896-1898#41; and American rule]\n\n  E[Strategic Adaptations] -->|4| F[Localization of Clergy and Church Leadership]\n  B --> F\n  E -->|5| G[Engagement with Social Issues]\n  D --> G\n  E -->|6| H[Political Involvement]\n  D --> H\n\n  I[Enduring Influence] -->|7| J[Deep-rooted Catholic Identity]\n  G --> J\n  H --> J\n  I -->|8| K[Continued Authority and Respect]\n  B --> K\n  C --> K\n  D --> K\n  F --> K\n  G --> K\n  H --> K\n  I -->|9| L[Adaptation to Modern Challenges]\n  K --> L",
+            "valid_syntax": true,
+            "response_time": 3.841655731201172
+        }
+    },
+    {
+        "sample_index": 40,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TB\n    A[Function: MarkedorCostPrice] -->|n=1| B[Calculate Marked Price]\n    A -->|n=2| C[Calculate Cost Price]\n    B --> D[Formula: (sp * 100) / (100 - percent)]\n    C --> E[Formula: (sp * 100) / (100 + percent)]\n    D --> F[Output: Integer]\n    E --> G[Output: Integer]\n    F --> H[Return Output]\n    G --> I[Return Output]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TB\n    A[Function: MarkedorCostPrice] -->|n=1| B[Calculate Marked Price]\n    A -->|n=2| C[Calculate Cost Price]\n    B --> D[Formula: #40;sp * 100#41; / #40;100 - percent#41;]\n    C --> E[Formula: #40;sp * 100#41; / #40;100 + percent#41;]\n    D --> F[Output: Integer]\n    E --> G[Output: Integer]\n    F --> H[Return Output]\n    G --> I[Return Output]",
+            "valid_syntax": true,
+            "response_time": 2.292912244796753
+        }
+    },
+    {
+        "sample_index": 41,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A([Start]) --> B[Train Model]\n    B --> C{Model Trained?}\n    C -->|Yes| D[Save Model as \"savedmodel.pt\"]\n    D --> E[Create Sampling Script \"sampling.py\"]\n    E --> F[Parse Command Line Args for Source, Target, and Output Path]\n    F --> G[Load Trained Model]\n    G --> H[Perform Image Harmonization]\n    H --> I[Save Harmonized Image]\n    I --> J([End])\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A(#91;Start#93;) --> B[Train Model]\n    B --> C{Model Trained?}\n    C -->|Yes| D[Save Model as &#34;savedmodel.pt&#34;]\n    D --> E[Create Sampling Script &#34;sampling.py&#34;]\n    E --> F[Parse Command Line Args for Source, Target, and Output Path]\n    F --> G[Load Trained Model]\n    G --> H[Perform Image Harmonization]\n    H --> I[Save Harmonized Image]\n    I --> J(#91;End#93;)",
+            "valid_syntax": true,
+            "response_time": 1.7277703285217285
+        }
+    },
+    {
+        "sample_index": 42,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[String Split Algorithm] --> B[Initialize DP and PrevIndex Arrays]\n    B --> C[Iterate Over String Length]\n    C --> D[Iterate Over Number of Words]\n    D --> E[Check Substring in Dictionary]\n    E -->|True| F[Update DP and PrevIndex]\n    F --> G{Check if DP[n][num_words] is True}\n    G -->|True| H[Backtrack to Find Split]\n    G -->|False| I[Return \"Cannot Split\"]\n    H --> J[Build Words List]\n    J --> K[Return Words List]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[String Split Algorithm] --> B[Initialize DP and PrevIndex Arrays]\n    B --> C[Iterate Over String Length]\n    C --> D[Iterate Over Number of Words]\n    D --> E[Check Substring in Dictionary]\n    E -->|True| F[Update DP and PrevIndex]\n    F --> G{Check if DP#91;n#93;#91;num_words#93; is True}\n    G -->|True| H[Backtrack to Find Split]\n    G -->|False| I[Return &#34;Cannot Split&#34;]\n    H --> J[Build Words List]\n    J --> K[Return Words List]",
+            "valid_syntax": true,
+            "response_time": 2.3997387886047363
+        }
+    },
+    {
+        "sample_index": 43,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph LR\n    A[Let number1 = 5] --> C[Let sum = number1 + number2]\n    B[Let number2 = 10] --> C\n    C --> D[console.log(sum) // Outputs 15]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph LR\n    A[Let number1 = 5] --> C[Let sum = number1 + number2]\n    B[Let number2 = 10] --> C\n    C --> D[console.log#40;sum#41; // Outputs 15]",
+            "valid_syntax": true,
+            "response_time": 0.9125301837921143
+        }
+    },
+    {
+        "sample_index": 44,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\nflowchart TD\n    A[Start] --> B{score = 87}\n    B --> C{Check if score <= 87}\n    C -->|True| D[Print \"1\"]\n    C -->|False| E[Do Nothing]\n    D --> F[End]\n    E --> F\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "flowchart TD\n    A[Start] --> B{score = 87}\n    B --> C{Check if score <= 87}\n    C -->|True| D[Print &#34;1&#34;]\n    C -->|False| E[Do Nothing]\n    D --> F[End]\n    E --> F",
+            "valid_syntax": true,
+            "response_time": 1.9479649066925049
+        }
+    },
+    {
+        "sample_index": 45,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Start] --> B(Import requests)\n    A --> C(Import BeautifulSoup)\n    A --> D[Define bot_token]\n    A --> E[Define chat_id]\n    A --> F[Function send_notification(message)]\n    A --> G[Function check_for_new_matches()]\n\n    G --> H[HTTP GET Request to \"https://24score.pro/football/top_streaks/under/\"]\n    H --> I[BeautifulSoup HTML Parsing]\n    I --> J[Check for Already Published]\n    J -->|Yes| K[Print \"Match already published\"]\n    J -->|No| L[Extract Match Data]\n    L --> M[Send notification via Telegram API]\n    M --> N[Check Response Status Code]\n    N -->|Success| O[Print \"Notification sent successfully\"]\n    N -->|Failure| P[Print \"Failed to send notification\"]\n\n    style A fill:#f9f,stroke:#333,stroke-width:4px\n    style O fill:#bbf,stroke:#333,stroke-width:2px\n    style P fill:#fbb,stroke:#333,stroke-width:2px\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Start] --> B(Import requests)\n    A --> C(Import BeautifulSoup)\n    A --> D[Define bot_token]\n    A --> E[Define chat_id]\n    A --> F[Function send_notification#40;message#41;]\n    A --> G[Function check_for_new_matches#40;#41;]\n\n    G --> H[HTTP GET Request to &#34;https://24score.pro/football/top_streaks/under/&#34;]\n    H --> I[BeautifulSoup HTML Parsing]\n    I --> J[Check for Already Published]\n    J -->|Yes| K[Print &#34;Match already published&#34;]\n    J -->|No| L[Extract Match Data]\n    L --> M[Send notification via Telegram API]\n    M --> N[Check Response Status Code]\n    N -->|Success| O[Print &#34;Notification sent successfully&#34;]\n    N -->|Failure| P[Print &#34;Failed to send notification&#34;]\n\n    style A fill:#f9f,stroke:#333,stroke-width:4px\n    style O fill:#bbf,stroke:#333,stroke-width:2px\n    style P fill:#fbb,stroke:#333,stroke-width:2px",
+            "valid_syntax": true,
+            "response_time": 4.135175943374634
+        }
+    },
+    {
+        "sample_index": 46,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  UMS[User Management System] -->|Sets \"RequirePasswordChange\" to true| U[User]\n  AP[Authentication Process] -->|Checks \"RequirePasswordChange\"| RCP{RequirePasswordChange Claim?}\n  RCP -->|True| PRP[Password Reset Page]\n  RCP -->|False| AC[Access Granted]\n  PRP -->|Sets new password| UMS\n  UMS -->|Sets \"RequirePasswordChange\" to false| U\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  UMS[User Management System] -->|Sets &#34;RequirePasswordChange&#34; to true| U[User]\n  AP[Authentication Process] -->|Checks &#34;RequirePasswordChange&#34;| RCP{RequirePasswordChange Claim?}\n  RCP -->|True| PRP[Password Reset Page]\n  RCP -->|False| AC[Access Granted]\n  PRP -->|Sets new password| UMS\n  UMS -->|Sets &#34;RequirePasswordChange&#34; to false| U",
+            "valid_syntax": true,
+            "response_time": 1.804215908050537
+        }
+    },
+    {
+        "sample_index": 47,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n    A[Error \"exit with code 1\"] --> B[Possible Reasons]\n    B --> C[Issues with Java working directory]\n    B --> D[Special characters in Windows username]\n    B --> E[Internal conflicts in Terminal/PowerShell/CMD]\n\n    A --> F[Suggested Solutions]\n    F --> G[Update Terminal/PowerShell/CMD]\n    F --> H[Run command with admin rights]\n    F --> I[Remove Autorun String from Registry]\n    F --> J[Set correct Java path in Minecraft settings]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n    A[Error &#34;exit with code 1&#34;] --> B[Possible Reasons]\n    B --> C[Issues with Java working directory]\n    B --> D[Special characters in Windows username]\n    B --> E[Internal conflicts in Terminal/PowerShell/CMD]\n\n    A --> F[Suggested Solutions]\n    F --> G[Update Terminal/PowerShell/CMD]\n    F --> H[Run command with admin rights]\n    F --> I[Remove Autorun String from Registry]\n    F --> J[Set correct Java path in Minecraft settings]",
+            "valid_syntax": true,
+            "response_time": 1.8358259201049805
+        }
+    },
+    {
+        "sample_index": 48,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph LR\n    A[German word \"eins\"] -->|Means| B[\"one\"]\n    C[German word \"Uhr\"] -->|Means| D[\"hour\"]\n    E[\"eins\" in Time] -->|Changes to| F[\"ein\"]\n    G[\"ein Uhr\"] -->|Correct form for| H[\"one o'clock\"]\n    I[\"eins Uhr\"] -->|Replaced by| J[\"ein Uhr\"]\n    K[\"ein Uhr\"] -->|Specific to| L[\"Colloquial variant of time-telling\"]\n    M[\"Official variant of time-telling\"] -->|No grammatical adjustment required| N[\"ein Uhr\"]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph LR\n    A[German word &#34;eins&#34;] -->|Means| B[&#34;one&#34;]\n    C[German word &#34;Uhr&#34;] -->|Means| D[&#34;hour&#34;]\n    E[&#34;eins&#34; in Time] -->|Changes to| F[&#34;ein&#34;]\n    G[&#34;ein Uhr&#34;] -->|Correct form for| H[&#34;one o&#39;clock&#34;]\n    I[&#34;eins Uhr&#34;] -->|Replaced by| J[&#34;ein Uhr&#34;]\n    K[&#34;ein Uhr&#34;] -->|Specific to| L[&#34;Colloquial variant of time-telling&#34;]\n    M[&#34;Official variant of time-telling&#34;] -->|No grammatical adjustment required| N[&#34;ein Uhr&#34;]",
+            "valid_syntax": true,
+            "response_time": 3.6186182498931885
+        }
+    },
+    {
+        "sample_index": 49,
+        "system": "You are provided with a mermaidJS diagram that is syntactically incorrect. \nCorrect the diagram syntax without altering its intended structure and content. Ensure the syntax is valid for mermaidJS.",
+        "prompt": "```mermaid\ngraph TD\n  A(Header Box: Contact Info --> Date --> Recipient's Info) --> B(Greeting Box: \"Dear [Hiring Manager's Name],\")\n  B --> C(Introduction Box: Introduction as a psychology student applying for HR internship)\n  C --> D(Educational Background Box: Current academic standing, major, relevant coursework)\n  D --> E(Skills and Experiences Box: Relevant skills and experiences)\n  E --> F(Motivation and Fit Box: Interest in HR, learning goals, contribution plans)\n  F --> G(Closing Box: Closing statement, thanks, sign-off)\n  G --> H[Attachments Line: Note on attachments]\n```",
+        "fine-tuned-gpt-3.5": {
+            "name": "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U",
+            "diagram": "graph TD\n  A(Header Box: Contact Info --> Date --> Recipient&#39;s Info) --> B(Greeting Box: &#34;Dear #91;Hiring Manager&#39;s Name#93;&#34;)\n  B --> C(Introduction Box: Introduction as a psychology student applying for HR internship)\n  C --> D(Educational Background Box: Current academic standing, major, relevant coursework)\n  D --> E(Skills and Experiences Box: Relevant skills and experiences)\n  E --> F(Motivation and Fit Box: Interest in HR, learning goals, contribution plans)\n  F --> G(Closing Box: Closing statement, thanks, sign-off)\n  G --> H[Attachments Line: Note on attachments]",
+            "valid_syntax": true,
+            "response_time": 1.8338918685913086
+        }
+    }
+]
