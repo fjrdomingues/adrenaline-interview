@@ -17,29 +17,18 @@ import time
 import sys
 from datetime import datetime
 
-# Get the current script's directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# Get the 'modules' directory
-modules_dir = os.path.join(current_dir, 'modules')
-
-# Normalize the path (resolve "..")
-modules_dir = os.path.normpath(modules_dir)
-
-if modules_dir not in sys.path:
-    sys.path.append(modules_dir)
-
-from diagram_validator import validate_diagram
+from modules.diagram_validator import validate_diagram
 
 # Define the number of samples to evaluate
 NUM_SAMPLES = 100  # number of random samples to evaluate on
 
 # Specify the models to compare
 # first_model_name = "gpt-4-0125-preview"
-second_model_name = "ft:gpt-3.5-turbo-0125:rubrick-ai::9Fl1jwjL"
+second_model_name = "ft:gpt-3.5-turbo-0125:rubrick-ai::9FkpgL2U"
 
 # Define the filenames
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-input_filename = 'rectifier_model/testing_dataset.jsonl'
+input_filename = 'rectifier_model/testing_unfixable.jsonl'
 evaluation_filename = f'../data/evaluation_results_{timestamp}.json'  # unique filename with timestamp
 
 # Load environment variables from .env file
@@ -146,13 +135,18 @@ for i, sample in enumerate(sample_data):
     second_model_elapsed = end_time - start_time
     
     # Validate diagrams
-    second_model_valid = validate_diagram(second_model_diagram)
+    second_model_valid, error_message = validate_diagram(second_model_diagram)
     
     # Update success counters
     if second_model_valid:
         second_model_success += 1
+    else:
+        print(f"Validation Error at Index {i}: {error_message}") 
 
     second_model_time_taken += second_model_elapsed
+
+    # Calculate current success rate
+    current_success_rate = (second_model_success / (i + 1)) * 100
     
     # Store the results
     result = {
@@ -164,10 +158,11 @@ for i, sample in enumerate(sample_data):
             "diagram": second_model_diagram,
             "valid_syntax": second_model_valid,
             "response_time": second_model_elapsed,
+            "error_message": error_message if not second_model_valid else None 
         }
     }
     print(i)
-    print("Model: ", second_model_name, "success: ", second_model_success, "time taken: ", second_model_elapsed)
+    print(f"Index: {i}, Model: {second_model_name}, Success: {second_model_success}/{i+1}, Current Success Rate: {current_success_rate:.2f}%, Time Taken: {second_model_elapsed:.2f}s")
     evaluation_results.append(result)
 
 # Save the evaluation results to a file

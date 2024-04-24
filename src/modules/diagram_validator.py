@@ -1,8 +1,11 @@
 import subprocess
 import re
+import requests
+import time
+
 
 # Function to validate a MermaidJS diagram
-def validate_diagram(code, is_markdown=True):
+def validate_diagram_cli(code, is_markdown=True):
     try:
         diagram_code = code.strip()
         
@@ -24,6 +27,27 @@ def validate_diagram(code, is_markdown=True):
     except subprocess.TimeoutExpired as e:
         print("TimeoutExpired:", e)
         return False
+
+# Function to validate a MermaidJS diagram using API
+def validate_diagram(diagram_definition):
+    url = 'http://192.168.1.75:8080/validate'
+    payload = {"definition": diagram_definition}
+
+    start_time = time.time()
+    
+    try:
+        response = requests.post(url, json=payload)
+        response.raise_for_status()
+        result = response.json()
+        # print(result)
+        elapsed_time = time.time() - start_time  # Calculate elapsed time
+        # print(f"Elapsed time: {elapsed_time:.2f} seconds")  # Print the elapsed time
+        return result.get('is_valid'), result.get('error_message')
+    except requests.exceptions.RequestException as e:
+        print("RequestException:", e)
+        elapsed_time = time.time() - start_time  # Calculate elapsed time on error
+        # print(f"Elapsed time on failure: {elapsed_time:.2f} seconds")
+        return False, str(e)
 
 if __name__ == "__main__":
     example_diagram_code =  """

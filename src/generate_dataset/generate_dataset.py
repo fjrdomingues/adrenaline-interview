@@ -9,21 +9,10 @@ import json
 from sklearn.model_selection import train_test_split
 import tiktoken
 
-# Get the current script's directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# Get the 'modules' directory
-modules_dir = os.path.join(current_dir, '..', 'modules')
-
-# Normalize the path (resolve "..")
-modules_dir = os.path.normpath(modules_dir)
-
-if modules_dir not in sys.path:
-    sys.path.append(modules_dir)
-
 # Import the necessary modules
-from diagram_validator import validate_diagram
-from mermaid_fixer import fix_mermaid_syntax
-from mermaid_md_extractor import extract_mermaid_code
+from modules.diagram_validator import validate_diagram
+from modules.mermaid_fixer import fix_mermaid_syntax
+from modules.mermaid_md_extractor import extract_mermaid_code
 
 def load_json_file(filename):
     with open(filename, 'r', encoding='utf-8') as file:
